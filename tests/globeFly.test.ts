@@ -8,12 +8,15 @@ import {
   phaseAt,
   pullBackFrame,
   slerpLatLng,
+  homeFrame,
+  idleSway,
+  TAIWAN_POV,
 } from "@/lib/globeFly";
 import { arcTargets } from "@/components/FishingMap";
 import { getSpots } from "@/lib/content";
 
 const from = { lat: 23.7, lng: 121, altitude: 1.85 };
-const penghu = { lat: 23.255, lng: 119.667 };
+const penghu = { lat: 23.2545, lng: 119.5195 };
 
 describe("globeFly choreography", () => {
   it("starts at the current POV and lands on the spot at dive altitude", () => {
@@ -34,7 +37,7 @@ describe("globeFly choreography", () => {
     let min = Infinity;
     for (let t = 0.62; t <= 1; t += 0.01) min = Math.min(min, flyFrame(from, penghu, t).altitude);
     expect(min).toBeLessThan(DIVE_ALTITUDE);
-    expect(min).toBeGreaterThan(DIVE_ALTITUDE - 0.15);
+    expect(min).toBeGreaterThanOrEqual(DIVE_ALTITUDE * 0.78 - 1e-9);
   });
 
   it("phases run lift → pan → dive → settled", () => {
@@ -59,6 +62,31 @@ describe("globeFly choreography", () => {
   it("pull-back eases altitude out without moving lat/lng", () => {
     const p = pullBackFrame({ lat: 23, lng: 120, altitude: 1.15 }, 1, 1.85);
     expect(p).toEqual({ lat: 23, lng: 120, altitude: 1.85 });
+  });
+});
+
+describe("Taiwan lock (idle POV)", () => {
+  it("home POV sits over Taiwan island, close enough to fill the stage", () => {
+    expect(TAIWAN_POV.lat).toBeGreaterThan(23.3);
+    expect(TAIWAN_POV.lat).toBeLessThan(24.0);
+    expect(TAIWAN_POV.lng).toBeGreaterThan(120.6);
+    expect(TAIWAN_POV.lng).toBeLessThan(121.1);
+    expect(TAIWAN_POV.altitude).toBeLessThan(0.3);
+  });
+
+  it("idle sway never walks off Taiwan (no drift toward the East China Sea)", () => {
+    for (let t = 0; t < 120_000; t += 250) {
+      const p = idleSway(t);
+      expect(angularDistance(p, TAIWAN_POV)).toBeLessThan(0.2);
+      expect(Math.abs(p.altitude - TAIWAN_POV.altitude)).toBeLessThan(0.01);
+    }
+  });
+
+  it("home glide ends exactly on the Taiwan lock from anywhere", () => {
+    const end = homeFrame({ lat: 30, lng: 130, altitude: 1.2 }, 1);
+    expect(end.lat).toBeCloseTo(TAIWAN_POV.lat, 4);
+    expect(end.lng).toBeCloseTo(TAIWAN_POV.lng, 4);
+    expect(end.altitude).toBeCloseTo(TAIWAN_POV.altitude, 6);
   });
 });
 

@@ -3,7 +3,7 @@ import { SoundGate } from "@/components/SoundGate";
 import { IntroGate } from "@/components/IntroOverlay";
 import { HeroCover } from "@/components/HeroCover";
 import { FishingMap } from "@/components/FishingMap";
-import { RouteConstellation } from "@/components/RouteConstellation";
+import { FbShowcase } from "@/components/FbShowcase";
 import { SoundAura } from "@/components/SoundAura";
 import { AmbientAudio } from "@/components/AmbientAudio";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -17,7 +17,7 @@ export default function Home() {
         <SoundAura />
         <HeroCover />
         <FishingMap />
-        <RouteConstellation />
+        <FbShowcase />
         <SiteFooter />
         <AmbientAudio />
       </main>

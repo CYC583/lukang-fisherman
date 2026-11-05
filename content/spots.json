@@ -5,8 +5,8 @@
     "title": "好美漁港淺場試釣（文長）",
     "region": "TW",
     "regionLabel": "嘉義布袋／好美",
-    "lat": 23.351,
-    "lng": 120.15,
+    "lat": 23.356,
+    "lng": 120.128,
     "approx": true,
     "species": [
       "黑鯛",
@@ -30,7 +30,8 @@
     "date": "2026-10-20",
     "confidence": "approximate",
     "imageNote": "同場系（嘉義布袋／好美沿岸卵石淺場）暫用痞客邦布袋篇圖；待下載該篇 FB 原文圖後 1:1 替換",
-    "placeNote": "實釣主場＝好美漁港；布袋南北堤／東嶼坪為文內背景提及"
+    "placeNote": "實釣主場＝好美漁港；布袋南北堤／東嶼坪為文內背景提及",
+    "coordNote": "好美漁港（好美寮）外堤；舊點 120.150 落在內陸布袋鎮區"
   },
   {
     "id": "fb-02iUtacK",
@@ -38,8 +39,8 @@
     "title": "兩匹40up黑牛達成",
     "region": "TW",
     "regionLabel": "台灣西岸淺場",
-    "lat": 24.05,
-    "lng": 120.4,
+    "lat": 24.063,
+    "lng": 120.386,
     "approx": true,
     "species": [
       "黑鯛",
@@ -61,7 +62,8 @@
     "date": "2026-04-24",
     "confidence": "provisional",
     "imageNote": "暫用本機漁獲圖；待下載該篇 FB 原文圖後替換（貼文未具名堤名）",
-    "placeNote": "貼文僅寫「本島岸磯／淺場標點」，座標取鹿港—布袋西岸公開海岸近似"
+    "placeNote": "貼文僅寫「本島岸磯／淺場標點」，座標取鹿港—布袋西岸公開海岸近似",
+    "coordNote": "未具名本島淺場→鹿港彰濱西岸線；舊點 120.400 在海堤內陸側"
   },
   {
     "id": "fb-0sEwGtM4",
@@ -69,8 +71,8 @@
     "title": "釣近卵石堆迴流處都是黑鯛、紅鰽",
     "region": "TW",
     "regionLabel": "台南港附近卵石堤",
-    "lat": 22.987,
-    "lng": 120.155,
+    "lat": 22.992,
+    "lng": 120.15,
     "approx": true,
     "species": [
       "黑鯛",
@@ -92,7 +94,8 @@
     "date": "unknown",
     "confidence": "approximate",
     "imageNote": "同場系（卵石堤／迴流）暫用本機 FB gallery 卵石圖；若與該 permalink 圖不一致待核對替換",
-    "placeNote": "貼文未寫縣市；對齊站內 logbook「台南港·卵石堤」場系近似座標"
+    "placeNote": "貼文未寫縣市；對齊站內 logbook「台南港·卵石堤」場系近似座標",
+    "coordNote": "台南安平港卵石堤（OSM 安平港 22.983,120.160）"
   },
   {
     "id": "fb-02seJhuG",
@@ -100,8 +103,8 @@
     "title": "黑牛／沙格（留言線索）",
     "region": "TW",
     "regionLabel": "台灣西岸（待核）",
-    "lat": 23.38,
-    "lng": 120.15,
+    "lat": 23.384,
+    "lng": 120.137,
     "approx": true,
     "species": [
       "黑鯛",
@@ -123,7 +126,8 @@
     "date": "unknown",
     "confidence": "provisional",
     "imageNote": "暫用本機漁獲近拍；待下載該篇 FB 原文圖。來源＝留言線索，信心較低",
-    "placeNote": "未具名釣點；座標暫放嘉義布袋沿岸近似，待正文核對後調整"
+    "placeNote": "未具名釣點；座標暫放嘉義布袋沿岸近似，待正文核對後調整",
+    "coordNote": "布袋港外堤（OSM 布袋港 23.379,120.138）；舊點落布袋市區"
   },
   {
     "id": "fb-02PwVphQ",
@@ -131,8 +135,8 @@
     "title": "澎湖飛回（留言線索）",
     "region": "TW",
     "regionLabel": "澎湖縣",
-    "lat": 23.255,
-    "lng": 119.667,
+    "lat": 23.259,
+    "lng": 119.521,
     "approx": true,
     "species": [
       "黑鯛"
@@ -153,7 +157,8 @@
     "date": "unknown",
     "confidence": "provisional",
     "imageNote": "同場系（澎湖南海）暫用痞客邦東嶼坪篇圖；待下載該篇 FB 原文圖後替換。來源＝留言線索",
-    "placeNote": "座標暫對東嶼坪一帶南海礁；正文確認後可改豬母礁／大蜈蚣礁等具名點"
+    "placeNote": "座標暫對東嶼坪一帶南海礁；正文確認後可改豬母礁／大蜈蚣礁等具名點",
+    "coordNote": "東嶼坪嶼東岸；舊點 119.667 在嶼東 ~15km 外海"
   },
   {
     "id": "pixnet-10343789171",
@@ -161,8 +166,8 @@
     "title": "2017東嶼坪-豬母塭記行",
     "region": "TW",
     "regionLabel": "澎湖縣",
-    "lat": 23.255,
-    "lng": 119.667,
+    "lat": 23.2545,
+    "lng": 119.5195,
     "approx": true,
     "species": [
       "黃雞魚",
@@ -187,7 +192,8 @@
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1505180942-4261655644.jpg",
     "date": "2017-09-08",
     "confidence": "approximate",
-    "imageNote": "同篇文內礁上搏魚圖（略過齊柏林空拍與碼頭休息照）"
+    "imageNote": "同篇文內礁上搏魚圖（略過齊柏林空拍與碼頭休息照）",
+    "coordNote": "東嶼坪嶼（OSM 23.255,119.509–23.259,119.516）豬母塭；舊點外海"
   },
   {
     "id": "pixnet-10342115425",
@@ -195,8 +201,8 @@
     "title": "再探蘇澳平礁",
     "region": "TW",
     "regionLabel": "宜蘭蘇澳",
-    "lat": 24.494,
-    "lng": 121.878,
+    "lat": 24.598,
+    "lng": 121.895,
     "approx": true,
     "species": [
       "白毛",
@@ -215,7 +221,8 @@
     "image": "/media/fb/pixnet/pixnet_10342115425_0bc213b9.jpg",
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1495504517-246691133.jpg",
     "date": "2017-05-23",
-    "confidence": "approximate"
+    "confidence": "approximate",
+    "coordNote": "蘇澳三仙礁·平礁（南方澳東 ~2km，24°35.9′N 121°53.7′E）；舊點 24.494 在東澳外海、偏南 11km"
   },
   {
     "id": "pixnet-10341125791",
@@ -223,8 +230,8 @@
     "title": "布袋南堤試釣",
     "region": "TW",
     "regionLabel": "嘉義布袋",
-    "lat": 23.365,
-    "lng": 120.145,
+    "lat": 23.371,
+    "lng": 120.131,
     "approx": true,
     "species": [
       "黑鯛",
@@ -243,7 +250,8 @@
     "image": "/media/fb/pixnet/pixnet_10341125791_8f2f09de.jpg",
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1491359395-2246670786.jpg",
     "date": "2017-04-05",
-    "confidence": "approximate"
+    "confidence": "approximate",
+    "coordNote": "布袋南堤（布袋港南側堤）"
   },
   {
     "id": "pixnet-10339421904",
@@ -251,8 +259,8 @@
     "title": "波止場黑鯛淺談",
     "region": "TW",
     "regionLabel": "台灣南部沿岸",
-    "lat": 23.37,
-    "lng": 120.15,
+    "lat": 23.366,
+    "lng": 120.13,
     "approx": true,
     "species": [
       "黑鯛"
@@ -272,7 +280,8 @@
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1486003916-2786356500.jpg",
     "date": "2017-02-02",
     "confidence": "approximate",
-    "placeNote": "文內未具名具體堤名；座標取南部波止公開岸線近似"
+    "placeNote": "文內未具名具體堤名；座標取南部波止公開岸線近似",
+    "coordNote": "文內未具名南部波止→布袋南堤岸線；舊點在內陸"
   },
   {
     "id": "pixnet-10339189251",
@@ -280,8 +289,8 @@
     "title": "鱗海0-53 vs 阿天達0-53",
     "region": "TW",
     "regionLabel": "北台灣沿岸",
-    "lat": 25.12,
-    "lng": 121.45,
+    "lat": 25.182,
+    "lng": 121.411,
     "approx": true,
     "species": [
       "黑鯛"
@@ -300,7 +309,8 @@
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1485217191-2215340179.jpg",
     "date": "2017-01-24",
     "confidence": "approximate",
-    "placeNote": "文內僅寫「北部戰場」，無具名堤名"
+    "placeNote": "文內僅寫「北部戰場」，無具名堤名",
+    "coordNote": "北部戰場→淡水沙崙／漁人碼頭外堤；舊點 25.12,121.45 在淡水市區內陸"
   },
   {
     "id": "pixnet-10339068909",
@@ -308,8 +318,8 @@
     "title": "布袋磯釣黑鯛實錄",
     "region": "TW",
     "regionLabel": "嘉義布袋",
-    "lat": 23.379,
-    "lng": 120.147,
+    "lat": 23.389,
+    "lng": 120.136,
     "approx": true,
     "species": [
       "黑鯛"
@@ -328,7 +338,8 @@
     "image": "/media/fb/pixnet/pixnet_10339068909_a10019d7.jpg",
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1484530794-3223318752.jpg",
     "date": "2017-01-19",
-    "confidence": "approximate"
+    "confidence": "approximate",
+    "coordNote": "布袋北堤"
   },
   {
     "id": "pixnet-10338846381",
@@ -336,8 +347,8 @@
     "title": "金寶螺前打-磯奴BOY",
     "region": "TW",
     "regionLabel": "嘉義布袋",
-    "lat": 23.379,
-    "lng": 120.155,
+    "lat": 23.38,
+    "lng": 120.14,
     "approx": true,
     "species": [
       "黑鯛"
@@ -355,7 +366,8 @@
     "image": "/media/fb/pixnet/pixnet_10338846381_40d2e78a.jpg",
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1483929299-88717713.jpg",
     "date": "2017-01-11",
-    "confidence": "approximate"
+    "confidence": "approximate",
+    "coordNote": "布袋港（OSM 23.379,120.138）"
   },
   {
     "id": "pixnet-10337577351",
@@ -363,8 +375,8 @@
     "title": "冬之淺場波止測試",
     "region": "TW",
     "regionLabel": "台灣西岸",
-    "lat": 24.08,
-    "lng": 120.4,
+    "lat": 24.073,
+    "lng": 120.388,
     "approx": true,
     "species": [
       "黑鯛",
@@ -384,7 +396,8 @@
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1480924073-3755641839.jpg",
     "date": "2016-12-05",
     "confidence": "approximate",
-    "placeNote": "文內未具名縣市堤名；座標取西岸公開波止近似"
+    "placeNote": "文內未具名縣市堤名；座標取西岸公開波止近似",
+    "coordNote": "西岸淺場波止→鹿港彰濱岸線；舊點內陸"
   },
   {
     "id": "pixnet-10336318272",
@@ -392,8 +405,8 @@
     "title": "處處驚喜的秋磯黑鯛",
     "region": "TW",
     "regionLabel": "基隆／北海岸",
-    "lat": 25.144,
-    "lng": 121.76,
+    "lat": 25.155,
+    "lng": 121.731,
     "approx": true,
     "species": [
       "黑鯛"
@@ -412,7 +425,8 @@
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1478144565-1656068860.jpg",
     "date": "2016-11-07",
     "confidence": "approximate",
-    "placeNote": "文內未寫精確堤名，僅「往基隆的方向／沒去過的釣點」"
+    "placeNote": "文內未寫精確堤名，僅「往基隆的方向／沒去過的釣點」",
+    "coordNote": "基隆外木山海岸（OSM 25.154,121.733）；舊點 121.760 在基隆港區"
   },
   {
     "id": "pixnet-10335386250",
@@ -420,8 +434,8 @@
     "title": "秋磯黑鯛-流的脈動",
     "region": "TW",
     "regionLabel": "台灣西岸",
-    "lat": 24.1,
-    "lng": 120.39,
+    "lat": 24.108,
+    "lng": 120.414,
     "approx": true,
     "species": [
       "黑鯛"
@@ -441,7 +455,8 @@
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1477099965-1993555433.jpg",
     "date": "2016-10-22",
     "confidence": "approximate",
-    "placeNote": "文內未具名堤名（僅提及上回布袋對話）"
+    "placeNote": "文內未具名堤名（僅提及上回布袋對話）",
+    "coordNote": "西岸夜磯→鹿港北側（線西／鹿港區）岸線"
   },
   {
     "id": "pixnet-10333409971",
@@ -449,8 +464,8 @@
     "title": "蘇澳三仙尖礁VS海草母逆襲",
     "region": "TW",
     "regionLabel": "宜蘭蘇澳",
-    "lat": 24.492,
-    "lng": 121.88,
+    "lat": 24.601,
+    "lng": 121.892,
     "approx": true,
     "species": [
       "白毛"
@@ -468,7 +483,8 @@
     "image": "/media/fb/pixnet/pixnet_10333409971_fc4add97.jpg",
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1473141500-1216235612.jpg",
     "date": "2016-09-06",
-    "confidence": "approximate"
+    "confidence": "approximate",
+    "coordNote": "蘇澳三仙礁·尖礁（平礁北側）；舊點偏南 11km"
   },
   {
     "id": "pixnet-10332547936",
@@ -476,8 +492,8 @@
     "title": "蘇澳三仙平礁初體驗",
     "region": "TW",
     "regionLabel": "宜蘭蘇澳",
-    "lat": 24.494,
-    "lng": 121.878,
+    "lat": 24.596,
+    "lng": 121.894,
     "approx": true,
     "species": [
       "白毛",
@@ -497,7 +513,8 @@
     "image": "/media/fb/pixnet/pixnet_10332547936_9431ff9a.jpg",
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1471931174-2233519456.jpg",
     "date": "2016-08-24",
-    "confidence": "approximate"
+    "confidence": "approximate",
+    "coordNote": "蘇澳三仙礁·平礁；舊點偏南 11km"
   },
   {
     "id": "pixnet-10332051259",
@@ -505,8 +522,8 @@
     "title": "鹿港北堤淺灘磯釣紀實",
     "region": "TW",
     "regionLabel": "彰化鹿港",
-    "lat": 24.075,
-    "lng": 120.415,
+    "lat": 24.088,
+    "lng": 120.393,
     "approx": true,
     "species": [
       "黑鯛"
@@ -525,7 +542,8 @@
     "image": "/media/fb/pixnet/pixnet_10332051259_363bff97.jpg",
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1471255141-108354996.jpg",
     "date": "2016-08-15",
-    "confidence": "approximate"
+    "confidence": "approximate",
+    "coordNote": "鹿港北堤（彰濱鹿港區北側岸堤）；舊點 120.415 在海堤內陸側"
   },
   {
     "id": "pixnet-10327877500",
@@ -533,8 +551,8 @@
     "title": "波止場-磯落入的思維",
     "region": "TW",
     "regionLabel": "台灣沿岸波止",
-    "lat": 24.06,
-    "lng": 120.42,
+    "lat": 24.055,
+    "lng": 120.374,
     "approx": true,
     "species": [
       "石斑",
@@ -555,7 +573,8 @@
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1464945701-3849260775.jpg",
     "date": "2016-06-03",
     "confidence": "approximate",
-    "placeNote": "文內稱老釣點／肉粽場，未具名公開地名"
+    "placeNote": "文內稱老釣點／肉粽場，未具名公開地名",
+    "coordNote": "老釣點肉粽場→鹿港南側岸線；舊點內陸"
   },
   {
     "id": "pixnet-10327423684",
@@ -563,8 +582,8 @@
     "title": "東澳烏石鼻-竹仔腳釣遊",
     "region": "TW",
     "regionLabel": "宜蘭南澳",
-    "lat": 24.485,
-    "lng": 121.837,
+    "lat": 24.481,
+    "lng": 121.858,
     "approx": true,
     "species": [
       "雀鯛",
@@ -584,7 +603,8 @@
     "image": "/media/fb/pixnet/pixnet_10327423684_f85987fe.jpg",
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1464229237-2211851588.jpg",
     "date": "2016-05-26",
-    "confidence": "approximate"
+    "confidence": "approximate",
+    "coordNote": "東澳烏石鼻（OSM 24.481,121.859）；舊點 121.837 在內陸蘇花路"
   },
   {
     "id": "pixnet-10325072905",
@@ -592,8 +612,8 @@
     "title": "淡水-三芝-石門沿岸探釣記行",
     "region": "TW",
     "regionLabel": "新北北海岸",
-    "lat": 25.258,
-    "lng": 121.508,
+    "lat": 25.292,
+    "lng": 121.534,
     "approx": true,
     "species": [
       "黑鯛",
@@ -612,7 +632,8 @@
     "image": "/media/fb/pixnet/pixnet_10325072905_58e8b508.jpg",
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1461143049-413346918.jpg",
     "date": "2016-04-21",
-    "confidence": "approximate"
+    "confidence": "approximate",
+    "coordNote": "淡水—三芝—石門沿岸→石門富基漁港岸線（OSM 25.292,121.534）；舊點在三芝內陸"
   },
   {
     "id": "pixnet-10282579850",
@@ -620,8 +641,8 @@
     "title": "下罟子航道淺場前打測試",
     "region": "TW",
     "regionLabel": "新北八里",
-    "lat": 25.148,
-    "lng": 121.398,
+    "lat": 25.144,
+    "lng": 121.38,
     "approx": true,
     "species": [
       "石班",
@@ -642,6 +663,7 @@
     "image": "/media/fb/pixnet/pixnet_10282579850_40c79872.jpg",
     "imageSourceUrl": "https://pimg.1px.tw/nokia1301471980/1430894644-130354184.jpg",
     "date": "2015-05-06",
-    "confidence": "approximate"
+    "confidence": "approximate",
+    "coordNote": "八里下罟子漁港（OSM 25.143,121.381）；舊點 121.398 在內陸"
   }
 ]

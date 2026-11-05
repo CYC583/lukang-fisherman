@@ -23,11 +23,11 @@ export type RouteBand = {
 /** Geographic band labels only (for captions); membership is by nearest band centre. */
 export const ROUTE_BANDS: RouteBand[] = [
   { key: "north", label: "北海岸", en: "NORTH COAST", lat: 25.17, lng: 121.5, lx: 30, ly: -28, anchor: "start" },
-  { key: "yilan", label: "宜蘭 蘇澳", en: "SU-AO", lat: 24.49, lng: 121.86, lx: -4, ly: 36, anchor: "middle" },
+  { key: "yilan", label: "宜蘭 蘇澳", en: "SU-AO", lat: 24.59, lng: 121.88, lx: -4, ly: 36, anchor: "middle" },
   { key: "lukang", label: "彰化 鹿港", en: "LUKANG", lat: 24.07, lng: 120.4, lx: -32, ly: 34, anchor: "end" },
   { key: "chiayi", label: "嘉義 布袋", en: "BUDAI", lat: 23.37, lng: 120.15, lx: 34, ly: 4, anchor: "start" },
   { key: "tainan", label: "台南", en: "TAINAN", lat: 22.99, lng: 120.16, lx: 18, ly: 6, anchor: "start" },
-  { key: "penghu", label: "澎湖", en: "PENGHU", lat: 23.255, lng: 119.667, lx: 0, ly: 28, anchor: "middle" },
+  { key: "penghu", label: "澎湖", en: "PENGHU", lat: 23.255, lng: 119.52, lx: 0, ly: 28, anchor: "middle" },
 ];
 
 export type RouteNode = {
@@ -208,17 +208,12 @@ export function buildRouteGraph(spots: Spot[]): RouteGraph {
   return { nodes, edges, rootId: spots[rootIdx].id, width: VIEW_W, height: VIEW_H };
 }
 
-/* —— cross-section bus: constellation ⇄ globe —— */
-export const FLY_EVENT = "lf:globe-fly";
-export const ACTIVE_EVENT = "lf:globe-active";
-export type FlyDetail = { id: string; scroll?: boolean };
-export type ActiveDetail = { id: string | null };
-
-export function requestGlobeFly(id: string, scroll = true) {
-  if (typeof window === "undefined") return;
-  window.dispatchEvent(new CustomEvent<FlyDetail>(FLY_EVENT, { detail: { id, scroll } }));
-}
-export function announceGlobeActive(id: string | null) {
-  if (typeof window === "undefined") return;
-  window.dispatchEvent(new CustomEvent<ActiveDetail>(ACTIVE_EVENT, { detail: { id } }));
-}
+/* —— cross-section bus moved to ./globeBus (kept re-exported for the unused star map) —— */
+export {
+  FLY_EVENT,
+  ACTIVE_EVENT,
+  requestGlobeFly,
+  announceGlobeActive,
+  type FlyDetail,
+  type ActiveDetail,
+} from "./globeBus";

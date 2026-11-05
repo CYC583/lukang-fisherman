@@ -4,7 +4,7 @@ import { describe, it, expect, afterEach, vi, beforeEach } from "vitest";
 import { SiteFooter } from "@/components/SiteFooter";
 import { IntroOverlay } from "@/components/IntroOverlay";
 import { SoundProvider } from "@/components/SoundContext";
-import { RouteConstellation } from "@/components/RouteConstellation";
+import { FbShowcase } from "@/components/FbShowcase";
 
 afterEach(cleanup);
 
@@ -28,10 +28,11 @@ describe("Film opener", () => {
   });
 });
 
-describe("RouteConstellation replaces GearWall on the page", () => {
-  it("is the route star map, not the gear wall", () => {
-    render(wrap(<RouteConstellation />));
-    expect(screen.getByRole("heading", { name: "釣場航跡 · 磯路星圖" })).toBeTruthy();
+describe("FbShowcase replaces the star map on the page", () => {
+  it("is the 粉專現場 showcase, not the star map / gear wall", () => {
+    render(wrap(<FbShowcase />));
+    expect(screen.getByRole("heading", { name: "粉專現場 · 展示廊" })).toBeTruthy();
+    expect(screen.queryByText("釣場航跡 · 磯路星圖")).toBeNull();
     expect(screen.queryByText("裝備牆")).toBeNull();
     expect(screen.queryByText("出海日誌")).toBeNull();
   });

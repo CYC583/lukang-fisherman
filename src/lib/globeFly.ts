@@ -7,8 +7,15 @@
 export type Pov = { lat: number; lng: number; altitude: number };
 export type FlyPhase = "idle" | "lift" | "pan" | "dive" | "settled";
 
-/** Altitude the camera settles at above a selected spot. */
-export const DIVE_ALTITUDE = 0.42;
+/**
+ * Idle / home POV — locked on Taiwan island (+ Penghu) so the whole island fills the stage.
+ * Tuned by @390 screenshots: Taiwan 21.9–25.3°N sits inside the frame with Penghu on the left.
+ */
+export const TAIWAN_POV: Pov = { lat: 23.66, lng: 120.76, altitude: 0.1 };
+/** Altitude the camera settles at above a selected spot (close enough that the pin reads on its shore). */
+export const DIVE_ALTITUDE = 0.04;
+/** Lowest altitude any flight frame may reach. */
+export const MIN_ALTITUDE = 0.028;
 /** Phase boundaries on normalised time t∈[0,1]. */
 export const PHASE_LIFT_END = 0.3;
 export const PHASE_PAN_END = 0.62;
@@ -74,7 +81,8 @@ export function flyDuration(from: Pov, to: { lat: number; lng: number }) {
 export function peakAltitude(from: Pov, to: { lat: number; lng: number }, target = DIVE_ALTITUDE) {
   const d = angularDistance(from, to);
   const base = Math.max(from.altitude, target);
-  return Math.min(3.1, base + 0.42 + (d / 180) * 1.6);
+  // in-island hops lift just enough to read the coastline; long hauls climb to see the globe
+  return Math.min(3.1, base + 0.12 + d * 0.035 + (d / 180) * 1.6);
 }
 
 export function phaseAt(t: number): FlyPhase {
@@ -105,12 +113,34 @@ export function flyFrame(from: Pov, to: { lat: number; lng: number }, t: number,
   } else {
     const u = (tt - PHASE_PAN_END) / (1 - PHASE_PAN_END);
     altitude = peak + (target - peak) * easeOutBack(u);
+    // keep the settle overshoot proportional to the close-up altitude (never skims the sea)
+    if (altitude < target) altitude = target - Math.min(target * 0.22, target - altitude);
   }
-  return { lat, lng, altitude: Math.max(0.18, altitude) };
+  return { lat, lng, altitude: Math.max(MIN_ALTITUDE, altitude) };
 }
 
 /** Pull-back used when the detail panel closes. */
 export function pullBackFrame(from: Pov, t: number, target = 1.85): Pov {
   const e = easeInOutSine(clamp01(t));
   return { lat: from.lat, lng: from.lng, altitude: from.altitude + (target - from.altitude) * e };
+}
+
+/** Glide home: great-circle back to the Taiwan lock while easing altitude (used on close / idle resume). */
+export function homeFrame(from: Pov, t: number, home: Pov = TAIWAN_POV): Pov {
+  const e = easeInOutSine(clamp01(t));
+  const { lat, lng } = slerpLatLng(from, home, e);
+  return { lat, lng, altitude: from.altitude + (home.altitude - from.altitude) * e };
+}
+
+/**
+ * Idle "breathing" around the Taiwan lock — replaces auto-rotate so pins never drift
+ * off toward the East China Sea. Tiny figure-eight sway; amp∈[0,1] fades it in/out.
+ */
+export function idleSway(timeMs: number, amp = 1, home: Pov = TAIWAN_POV): Pov {
+  const s = timeMs / 1000;
+  return {
+    lat: home.lat + Math.sin(s * 0.23) * 0.07 * amp,
+    lng: home.lng + Math.sin(s * 0.17 + 1.1) * 0.11 * amp,
+    altitude: home.altitude + Math.sin(s * 0.29) * 0.004 * amp,
+  };
 }

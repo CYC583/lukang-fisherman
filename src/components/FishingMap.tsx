@@ -22,19 +22,18 @@ import {
   easeOutCubic,
   flyDuration,
   flyFrame,
+  homeFrame,
+  idleSway,
   phaseAt,
-  pullBackFrame,
+  TAIWAN_POV,
   type FlyPhase,
   type Pov,
 } from "@/lib/globeFly";
-import {
-  FLY_EVENT,
-  announceGlobeActive,
-  type FlyDetail,
-} from "@/lib/routes";
+import { FLY_EVENT, announceGlobeActive, type FlyDetail } from "@/lib/globeBus";
 import { sfx } from "@/lib/sfx";
 import { useSoundOptional } from "./SoundContext";
 
+type CoastFeature = { type: "Feature"; properties: Record<string, unknown>; geometry: object };
 type GlobeComponent = ComponentType<GlobeProps & { ref?: React.Ref<GlobeMethods> }>;
 type ArcDatum = {
   key: string;
@@ -49,10 +48,11 @@ type PanelState = "in" | "out";
 
 const GOLD = "#C5A059";
 const INDIGO = "#0B1C2C";
-const TAIWAN_POV: Pov = { lat: 23.7, lng: 121.0, altitude: 1.85 };
-const INTRO_FROM: Pov = { lat: 17.5, lng: 112.0, altitude: 3.0 };
-const AUTO_ROTATE_SPEED = 0.32;
-/** Idle wait after a drag/pinch before auto-rotate starts easing back in. */
+const INTRO_FROM: Pov = { lat: 19.5, lng: 114.5, altitude: 2.6 };
+/** Idle sway amplitude target (replaces auto-rotate: the camera stays locked on Taiwan). */
+const IDLE_SWAY = 1;
+const HOME_GLIDE_MS = 1500;
+/** Idle wait after a drag/pinch before the camera glides home to the Taiwan lock. */
 export const RESUME_DELAY_MS = 5200;
 const ARC_POOL = 8;
 const PANEL_OUT_MS = 240;
@@ -272,6 +272,7 @@ export function FishingMap() {
   const resumeTimer = useRef<number | null>(null);
   const rotateTarget = useRef(0);
   const rotateSpeed = useRef(0);
+  const [coast, setCoast] = useState<CoastFeature[]>([]);
   const pinEls = useRef(new Map<string, HTMLElement>());
   const selectRef = useRef<(s: Spot) => void>(() => {});
 
@@ -282,6 +283,21 @@ export function FishingMap() {
   useEffect(() => {
     soundRef.current = soundOn;
   }, [soundOn]);
+
+  /* Crisp Taiwan + Penghu coastline (NE 10m + OSM islets) — the 2K raster alone blurs to a blob. */
+  useEffect(() => {
+    let cancelled = false;
+    if (typeof fetch !== "function") return;
+    fetch("/media/globe/taiwan-coast.geojson")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((fc: { features?: CoastFeature[] } | null) => {
+        if (!cancelled && fc?.features) setCoast(fc.features);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -325,8 +341,8 @@ export function FishingMap() {
         return {
           lat: s.lat,
           lng: s.lng,
-          maxR: on ? 3.2 : rel ? 2 : 1.4,
-          propagationSpeed: on ? 3 : rel ? 2.1 : 1.2,
+          maxR: on ? 0.5 : rel ? 0.32 : 0.22,
+          propagationSpeed: on ? 0.55 : rel ? 0.36 : 0.2,
           repeatPeriod: on ? 820 : rel ? 1250 : 1900 + (i % 5) * 160,
           strength: on ? 1 : rel ? 0.75 : active ? 0.25 : 0.5,
         };
@@ -356,12 +372,37 @@ export function FishingMap() {
     if (g) g.controls().autoRotate = false;
   }, [clearResume]);
 
-  /** Ease auto-rotate back in after `delay` — never snaps back to full speed. */
+  /**
+   * After `delay`: glide home to the Taiwan lock, then ease the idle sway in.
+   * (No auto-rotate — spinning walked the pins off toward the East China Sea.)
+   */
   const scheduleResume = useCallback(
     (delay: number) => {
       clearResume();
       resumeTimer.current = window.setTimeout(() => {
-        if (!interacting.current && !activeRef.current) rotateTarget.current = AUTO_ROTATE_SPEED;
+        if (interacting.current || activeRef.current) return;
+        const g = globeRef.current;
+        if (!g || prefersReducedMotion()) {
+          if (g) g.pointOfView(TAIWAN_POV, 0);
+          return;
+        }
+        const cur = g.pointOfView();
+        const from: Pov = {
+          lat: cur.lat ?? TAIWAN_POV.lat,
+          lng: cur.lng ?? TAIWAN_POV.lng,
+          altitude: cur.altitude ?? TAIWAN_POV.altitude,
+        };
+        const gen = flyGen.current;
+        const far =
+          angularDistance(from, TAIWAN_POV) > 0.02 ||
+          Math.abs(from.altitude - TAIWAN_POV.altitude) > 0.004;
+        void tween(
+          far ? HOME_GLIDE_MS : 0,
+          (t) => g.pointOfView(homeFrame(from, t), 0),
+          () => gen === flyGen.current && !interacting.current && !activeRef.current,
+        ).then((ok) => {
+          if (ok) rotateTarget.current = IDLE_SWAY;
+        });
       }, delay);
     },
     [clearResume],
@@ -514,11 +555,11 @@ export function FishingMap() {
         altitude: cur.altitude ?? TAIWAN_POV.altitude,
       };
       void tween(
-        prefersReducedMotion() ? 0 : 1150,
-        (t) => g.pointOfView(pullBackFrame(from, t, TAIWAN_POV.altitude), 0),
+        prefersReducedMotion() ? 0 : 1250,
+        (t) => g.pointOfView(homeFrame(from, t), 0),
         () => gen === flyGen.current,
       ).then((ok) => {
-        if (ok) scheduleResume(1800);
+        if (ok) scheduleResume(1200);
       });
     }
   }, [collapseArcs, scheduleResume, setPhase, tap]);
@@ -532,7 +573,7 @@ export function FishingMap() {
     });
   }, [active, related]);
 
-  /* 磯路星圖 → globe: fly on request (scroll the stage into view first if needed). */
+  /* 展示廊 / other sections → globe: fly on request (scroll the stage into view first if needed). */
   useEffect(() => {
     const onFly = (e: Event) => {
       const detail = (e as CustomEvent<FlyDetail>).detail;
@@ -575,7 +616,8 @@ export function FishingMap() {
     const controls = g.controls();
     controls.enableDamping = true;
     controls.dampingFactor = 0.06; // longer inertial glide after a flick
-    controls.minDistance = 110;
+    controls.minDistance = 102.4;
+    controls.autoRotate = false;
     controls.maxDistance = 500;
     controls.enablePan = false;
     const tune = () => {
@@ -587,13 +629,19 @@ export function FishingMap() {
     tune();
 
     let loop = 0;
-    const tick = () => {
+    let swayT0 = -1;
+    const tick = (now: number) => {
       const target = rotateTarget.current;
-      // critically-damped-ish approach: ~1.6s to reach cruise speed
+      // critically-damped-ish approach: ~1.6s to fade the idle sway in / out
       rotateSpeed.current += (target - rotateSpeed.current) * 0.028;
       if (Math.abs(target - rotateSpeed.current) < 0.002) rotateSpeed.current = target;
-      controls.autoRotateSpeed = rotateSpeed.current;
-      controls.autoRotate = rotateSpeed.current > 0.003;
+      controls.autoRotate = false;
+      if (rotateSpeed.current > 0.003 && !interacting.current && !activeRef.current) {
+        if (swayT0 < 0) swayT0 = now;
+        g.pointOfView(idleSway(now - swayT0, rotateSpeed.current), 0);
+      } else if (rotateSpeed.current <= 0.003) {
+        swayT0 = -1;
+      }
       loop = raf(tick);
     };
     loop = raf(tick);
@@ -657,7 +705,6 @@ export function FishingMap() {
     if (!g) return;
     if (prefersReducedMotion()) {
       g.pointOfView(TAIWAN_POV, 0);
-      rotateTarget.current = AUTO_ROTATE_SPEED;
       return;
     }
     const gen = flyGen.current;
@@ -789,7 +836,7 @@ export function FishingMap() {
           {drawerOpen ? "收合圖鑑" : "魚種圖鑑"}
         </button>
         <a
-          href="#routes"
+          href="#showcase"
           onClick={tap}
           className="inline-flex items-center transition active:opacity-90"
           style={{
@@ -802,7 +849,7 @@ export function FishingMap() {
             letterSpacing: "0.22em",
           }}
         >
-          磯路星圖
+          粉專現場
         </a>
       </div>
 
@@ -943,7 +990,7 @@ export function FishingMap() {
                 htmlElementsData={spots}
                 htmlLat="lat"
                 htmlLng="lng"
-                htmlAltitude={0.012}
+                htmlAltitude={0.0015}
                 htmlElement={htmlElement}
                 htmlTransitionDuration={0}
                 htmlElementVisibilityModifier={(el, isVisible) => {
@@ -969,17 +1016,17 @@ export function FishingMap() {
                 arcDashGap={0.22}
                 arcDashInitialGap="initialGap"
                 arcDashAnimateTime={2600}
-                arcStroke={0.14}
-                arcAltitudeAutoScale={0.42}
+                arcStroke={0.012}
+                arcAltitudeAutoScale={0.25}
                 arcsTransitionDuration={900}
                 pointsData={spots}
                 pointLat="lat"
                 pointLng="lng"
                 pointAltitude={(d) =>
-                  (d as Spot).id === active?.id ? 0.02 : related.has((d as Spot).id) ? 0.009 : 0.004
+                  (d as Spot).id === active?.id ? 0.004 : related.has((d as Spot).id) ? 0.0025 : 0.0015
                 }
                 pointRadius={(d) =>
-                  (d as Spot).id === active?.id ? 0.2 : related.has((d as Spot).id) ? 0.13 : 0.09
+                  (d as Spot).id === active?.id ? 0.03 : related.has((d as Spot).id) ? 0.022 : 0.016
                 }
                 pointColor={(d) =>
                   active && (d as Spot).id !== active.id && !related.has((d as Spot).id)
@@ -987,6 +1034,14 @@ export function FishingMap() {
                     : GOLD
                 }
                 pointsMerge={false}
+                polygonsData={coast}
+                polygonGeoJsonGeometry="geometry"
+                polygonCapColor={() => "rgba(197,160,89,0.16)"}
+                polygonSideColor={() => "rgba(197,160,89,0.08)"}
+                polygonStrokeColor={() => "rgba(222,186,116,0.9)"}
+                polygonAltitude={0.0008}
+                polygonCapCurvatureResolution={0.5}
+                polygonsTransitionDuration={0}
                 pointsTransitionDuration={650}
                 onGlobeReady={() => {
                   setReady(true);
@@ -1069,7 +1124,7 @@ export function FishingMap() {
               fontFamily: "var(--font-display)",
             }}
           >
-            DRAG · PINCH · TAP PIN
+            TAIWAN LOCK · DRAG · PINCH · TAP PIN
           </p>
         </div>
 
