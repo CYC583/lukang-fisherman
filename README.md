@@ -68,14 +68,11 @@
 
 ## NFC 寫入（部署後）
 
-1. 完成 Vercel 部署（Task 8），取得正式 HTTPS 網址。  
-   預期形式（部署後以實際為準）：`https://lukang-fisherman.vercel.app`  
-   若綁自訂網域，以自訂網域為準。
+1. **正式 HTTPS 網址（已上線）**：`https://lukang-fisherman.vercel.app`  
+   若之後綁自訂網域，以自訂網域為準並更新此段。
 2. 用 NFC 寫入工具（如 NFC Tools）將 **NTAG216** 寫成該 URL（URI / URL record）。
 3. 實機掃一次：應開瀏覽器進本站，首屏即可按「加入鹿港漁人」。
-4. 把**最終 URL**補進本段（取代上方預期網址）並 commit，方便之後重寫標籤。
-
-> 目前尚未部署：請勿把預覽／localhost 寫進 NFC。
+4. 重寫標籤時一律用本段紀錄的最終 URL。
 
 ## 內容檔對照
 
