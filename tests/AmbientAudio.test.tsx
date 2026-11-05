@@ -5,18 +5,19 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { AmbientAudio } from "@/components/AmbientAudio";
 import { SoundProvider, useSound } from "@/components/SoundContext";
 
-function ChooseSound({ on }: { on: boolean }) {
-  const { choose } = useSound();
+function ChooseSound({ on, intro = true }: { on: boolean; intro?: boolean }) {
+  const { choose, markIntroDone } = useSound();
   useEffect(() => {
     choose(on);
-  }, [choose, on]);
+    if (intro) markIntroDone();
+  }, [choose, markIntroDone, on, intro]);
   return null;
 }
 
-function wrap(ui: ReactNode, soundOn: boolean) {
+function wrap(ui: ReactNode, soundOn: boolean, intro = true) {
   return (
     <SoundProvider>
-      <ChooseSound on={soundOn} />
+      <ChooseSound on={soundOn} intro={intro} />
       {ui}
     </SoundProvider>
   );
@@ -40,10 +41,15 @@ describe("AmbientAudio", () => {
     expect(play).not.toHaveBeenCalled();
   });
 
-  it("plays wave ambient after gate yes, and can mute again", () => {
-    render(wrap(<AmbientAudio />, true));
+  it("plays documentary BGM after gate yes + intro done, and can mute", () => {
+    render(wrap(<AmbientAudio />, true, true));
     expect(play).toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "關閉配樂" }));
     expect(screen.getByRole("button", { name: "開啟配樂" })).toBeTruthy();
+  });
+
+  it("waits for intro before ambient", () => {
+    render(wrap(<AmbientAudio />, true, false));
+    expect(play).not.toHaveBeenCalled();
   });
 });

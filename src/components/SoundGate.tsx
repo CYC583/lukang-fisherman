@@ -4,6 +4,7 @@ import { getSite } from "@/lib/content";
 import { setSfxEnabled, sfx } from "@/lib/sfx";
 import { useSound } from "./SoundContext";
 
+/** First screen: silent until she taps our custom button. */
 export function SoundGate() {
   const { soundOn, choose } = useSound();
   const site = getSite();
@@ -14,45 +15,44 @@ export function SoundGate() {
       role="dialog"
       aria-modal="true"
       aria-label={site.soundPrompt}
-      className="fixed inset-0 z-[80] flex flex-col items-center justify-center gap-8 bg-[var(--color-indigo)]/85 px-6 backdrop-blur-md"
+      className="fixed inset-0 z-[90] flex flex-col items-center justify-center bg-[var(--color-indigo)] px-6"
     >
-      <div className="flex flex-col items-center gap-3 text-center">
-        <svg width="72" height="24" viewBox="0 0 160 40" aria-hidden className="opacity-90">
-          <path
-            d="M0 20 Q20 5 40 20 T80 20 T120 20 T160 20"
-            fill="none"
-            stroke="var(--color-gold)"
-            strokeWidth="1.5"
-          />
-        </svg>
-        <p className="text-2xl font-bold tracking-[0.35em] text-[var(--color-paper)]">{site.title}</p>
-        <p className="mt-2 text-sm tracking-[0.25em] text-[var(--color-gold)]">{site.soundPrompt}</p>
-      </div>
-      <div className="flex w-full max-w-xs flex-col gap-3">
-        <button
-          type="button"
-          onClick={() => {
-            setSfxEnabled(true);
-            sfx.confirm();
-            sfx.splash();
-            choose(true);
+      <div className="mb-12 flex flex-col items-center gap-4 text-center">
+        <p
+          className="font-bold leading-none text-[var(--color-gold)]"
+          style={{
+            writingMode: "vertical-rl",
+            letterSpacing: "0.35em",
+            fontSize: "clamp(2.5rem, 11vw, 3.5rem)",
           }}
-          className="rounded-full bg-[var(--color-gold)] px-6 py-4 text-center text-base font-bold tracking-[0.3em] text-[var(--color-indigo)] shadow-lg transition active:scale-95"
         >
-          {site.soundYes}
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            setSfxEnabled(false);
-            choose(false);
-          }}
-          className="rounded-full border border-[var(--color-paper)]/50 bg-transparent px-6 py-3.5 text-center text-sm tracking-[0.3em] text-[var(--color-paper)] transition active:scale-95"
-        >
-          {site.soundNo}
-        </button>
+          {site.title}
+        </p>
+        <p className="text-[10px] tracking-[0.45em] text-[var(--color-paper)]/60">{site.subtitle}</p>
       </div>
-      <p className="text-[10px] tracking-[0.2em] text-[var(--color-paper)]/50">之後右下角還可以開關</p>
+
+      <button
+        type="button"
+        onClick={() => {
+          setSfxEnabled(true);
+          sfx.confirm();
+          choose(true);
+        }}
+        className="min-h-[56px] w-full max-w-xs rounded-full bg-[var(--color-gold)] px-8 py-5 text-center text-base font-bold tracking-[0.22em] text-[var(--color-indigo)] shadow-[0_12px_40px_rgba(198,167,94,0.45)] transition active:scale-[0.98]"
+      >
+        {site.soundYes}
+      </button>
+
+      <button
+        type="button"
+        onClick={() => {
+          setSfxEnabled(false);
+          choose(false);
+        }}
+        className="mt-5 min-h-[44px] px-4 text-xs tracking-[0.3em] text-[var(--color-paper)]/55 underline underline-offset-4"
+      >
+        {site.soundNo}
+      </button>
     </div>
   );
 }

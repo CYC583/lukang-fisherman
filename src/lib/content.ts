@@ -13,12 +13,14 @@ export type Site = {
   facebookUrl: string;
   footerCredit: string;
   primaryCta: string;
+  secondaryCta: string;
   joinCta: string;
   storyCta: string;
   afterStoryCta: string;
   soundPrompt: string;
   soundYes: string;
   soundNo: string;
+  tagline: string;
 };
 
 export type Story = {

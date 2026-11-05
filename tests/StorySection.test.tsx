@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import { describe, it, expect, afterEach, vi, beforeEach } from "vitest";
-import { StorySection } from "@/components/StorySection";
 import { MemoryPostcards } from "@/components/MemoryPostcards";
 import { SeaLogbook } from "@/components/SeaLogbook";
 import { SiteFooter } from "@/components/SiteFooter";
+import { IntroOverlay } from "@/components/IntroOverlay";
 import { SoundProvider } from "@/components/SoundContext";
 
 afterEach(cleanup);
@@ -13,22 +13,21 @@ function wrap(ui: ReactNode) {
   return <SoundProvider>{ui}</SoundProvider>;
 }
 
-describe("StorySection", () => {
+describe("Film opener", () => {
   beforeEach(() => {
     window.HTMLMediaElement.prototype.play = vi.fn(() => Promise.resolve()) as never;
     window.HTMLMediaElement.prototype.pause = vi.fn();
   });
 
-  it("has #story anchor and cast can be skipped", () => {
-    const { container } = render(wrap(<StorySection />));
-    expect(container.querySelector("#story")).toBeTruthy();
-    fireEvent.click(screen.getByRole("button", { name: "略過拋竿" }));
-    expect(screen.getByText("師傅幫你甩了——上鉤！")).toBeTruthy();
-  });
-
-  it("renders cinematic video media", () => {
-    const { container } = render(wrap(<StorySection />));
-    expect(container.querySelector('video[src="/media/dad-cover-cinematic.mp4"]')).toBeTruthy();
+  it("plays hard-cut montage and skip works once", () => {
+    const onDone = vi.fn();
+    const { container } = render(
+      wrap(<IntroOverlay onDone={onDone} />),
+    );
+    expect(container.querySelector('video[src="/media/opener-montage.mp4"]')).toBeTruthy();
+    fireEvent.click(screen.getByText("略過"));
+    fireEvent.click(screen.getByText("略過"));
+    expect(onDone).toHaveBeenCalledTimes(1);
   });
 });
 

@@ -22,7 +22,7 @@ it("skip calls onDone once", () => {
   expect(onDone).toHaveBeenCalledTimes(1);
 });
 
-it("sound gate shows custom buttons and enables sound", () => {
+it("sound gate shows custom enter button and enables sound", () => {
   function Probe() {
     const { soundOn } = useSound();
     return <span data-testid="sound">{String(soundOn)}</span>;
@@ -33,12 +33,12 @@ it("sound gate shows custom buttons and enables sound", () => {
       <Probe />
     </SoundProvider>,
   );
-  expect(screen.getByText("要開啟聲音嗎？")).toBeTruthy();
-  fireEvent.click(screen.getByRole("button", { name: "開啟聲音" }));
+  expect(screen.getByRole("button", { name: "點我開啟聲音／進入" })).toBeTruthy();
+  fireEvent.click(screen.getByRole("button", { name: "點我開啟聲音／進入" }));
   expect(screen.getByTestId("sound").textContent).toBe("true");
 });
 
-it("先靜音 keeps audio off", () => {
+it("靜音進入 keeps audio off", () => {
   function Probe() {
     const { soundOn } = useSound();
     return <span data-testid="sound">{String(soundOn)}</span>;
@@ -49,6 +49,6 @@ it("先靜音 keeps audio off", () => {
       <Probe />
     </SoundProvider>,
   );
-  fireEvent.click(screen.getByRole("button", { name: "先靜音" }));
+  fireEvent.click(screen.getByRole("button", { name: "靜音進入" }));
   expect(screen.getByTestId("sound").textContent).toBe("false");
 });

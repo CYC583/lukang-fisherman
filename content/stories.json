@@ -1,50 +1,14 @@
 [
   {
-    "id": "open-sea",
+    "id": "opener",
     "chapter": "01",
-    "title": "與海的靜默對話",
-    "narration": [
-      "天還沒亮，車燈切過台十七線。",
-      "磯岩在霧裡，浪一層一層翻。",
-      "他說：看海像剝洋蔥——浪腳、迴流、卵石堆。"
-    ],
+    "title": "鹿港漁人",
+    "narration": ["磯釣，是與海的靜默對話。"],
     "media": {
       "type": "video",
-      "src": "/media/dad-cover-cinematic.mp4",
-      "alt": "鹿港漁人礁岩海岸",
-      "credit": "鹿港漁人 Facebook 公開封面／貼文"
-    }
-  },
-  {
-    "id": "duel",
-    "chapter": "02",
-    "title": "與黑鯛對智",
-    "narration": [
-      "餌順著流送出去，像放風箏一樣耐心。",
-      "黑鯛很精，但漁人更懂牠們會躲在哪裡。",
-      "竿尖一沉——上了。"
-    ],
-    "media": {
-      "type": "video",
-      "src": "/media/dad-catch-cinematic.mp4",
-      "alt": "黑鯛戰果特寫",
-      "credit": "鹿港漁人 Facebook 公開貼文"
-    }
-  },
-  {
-    "id": "still-casting",
-    "chapter": "03",
-    "title": "現在，還在釣",
-    "narration": [
-      "從磯釣到前打，十年來沒停過。",
-      "釣友喊他一聲師傅。",
-      "海一直在，鹿港漁人也一直在。"
-    ],
-    "media": {
-      "type": "video",
-      "src": "/media/story-reef-dawn.mp4",
-      "alt": "清晨磯場",
-      "credit": "磯場氛圍短片"
+      "src": "/media/opener-montage.mp4",
+      "alt": "鹿港漁人電影開場",
+      "credit": "鹿港漁人公開釣行影像"
     }
   }
 ]
