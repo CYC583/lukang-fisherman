@@ -65,27 +65,30 @@ export function HeroCover() {
         }}
       >
         <p
-          className="mb-3 text-[12px] font-medium tracking-[0.35em]"
-          style={{ color: "#C5A059" }}
+          className="mb-4 font-semibold tracking-[0.28em]"
+          style={{ color: "#C5A059", fontSize: "clamp(0.95rem, 3.8vw, 1.125rem)" }}
         >
           {site.eyebrow}
         </p>
 
         <h1
           className="font-bold leading-none tracking-[0.2em]"
-          style={{ color: "#1a1a1a", fontSize: "clamp(1.75rem, 8vw, 2.125rem)" }}
+          style={{ color: "#1a1a1a", fontSize: "clamp(2.15rem, 9.5vw, 2.6rem)" }}
         >
           {site.title}
         </h1>
 
-        <p className="mt-2 text-[11px] tracking-[0.4em]" style={{ color: "#666" }}>
+        <p className="mt-3 tracking-[0.35em]" style={{ color: "#333", fontSize: "clamp(0.8rem, 3.2vw, 0.95rem)" }}>
           {site.subtitle}
         </p>
 
         <div className="my-4 h-px w-10" style={{ background: "rgba(197,160,89,0.7)" }} aria-hidden />
 
         {/* One attitude line — not lyric */}
-        <p className="mb-6 text-[14px] leading-relaxed tracking-[0.12em]" style={{ color: "#444" }}>
+        <p
+          className="mb-7 font-medium leading-relaxed tracking-[0.08em]"
+          style={{ color: "#1a1a1a", fontSize: "clamp(1.2rem, 5.2vw, 1.45rem)" }}
+        >
           {site.tagline}
         </p>
 
