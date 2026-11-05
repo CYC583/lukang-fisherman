@@ -1,14 +1,25 @@
 "use client";
 import { useRef, useState } from "react";
+import { sfx } from "@/lib/sfx";
+import { useSound } from "./SoundContext";
 
 const THRESHOLD = 60;
 
 export function CastInteraction({ onDone }: { onDone?: () => void }) {
   const [state, setState] = useState<"idle" | "cast" | "skipped">("idle");
   const start = useRef<number | null>(null);
+  const { soundOn } = useSound();
 
   const finish = (s: "cast" | "skipped") => {
     if (state !== "idle") return;
+    if (soundOn) {
+      if (s === "cast") {
+        sfx.cast();
+        setTimeout(() => sfx.hook(), 280);
+      } else {
+        sfx.tap();
+      }
+    }
     setState(s);
     onDone?.();
   };

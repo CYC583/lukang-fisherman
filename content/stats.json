@@ -1,0 +1,8 @@
+{
+  "seasonLabel": "本季戰績",
+  "items": [
+    { "id": "biggest", "label": "最大尾印象", "value": 42, "suffix": "cm+", "hint": "公開戰果尺度（示意）" },
+    { "id": "trips", "label": "出海日誌則數", "value": 4, "suffix": "則", "hint": "本站精選公開貼文" },
+    { "id": "species", "label": "圖鑑魚種", "value": 3, "suffix": "種", "hint": "粉專公開漁獲" }
+  ]
+}

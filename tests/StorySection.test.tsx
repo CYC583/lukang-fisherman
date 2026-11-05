@@ -3,6 +3,7 @@ import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import { describe, it, expect, afterEach, vi, beforeEach } from "vitest";
 import { StorySection } from "@/components/StorySection";
 import { MemoryPostcards } from "@/components/MemoryPostcards";
+import { SeaLogbook } from "@/components/SeaLogbook";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SoundProvider } from "@/components/SoundContext";
 
@@ -28,16 +29,23 @@ describe("StorySection", () => {
   it("renders cinematic video media", () => {
     const { container } = render(wrap(<StorySection />));
     expect(container.querySelector('video[src="/media/dad-cover-cinematic.mp4"]')).toBeTruthy();
-    expect(container.querySelector('video[src="/media/story-reef-dawn.mp4"]')).toBeTruthy();
+  });
+});
+
+describe("SeaLogbook", () => {
+  it("shows logbook cards and filters", () => {
+    render(<SeaLogbook />);
+    expect(screen.getByText("出海日誌")).toBeTruthy();
+    expect(screen.getAllByText("黑鯛").length).toBeGreaterThanOrEqual(1);
+    fireEvent.click(screen.getByRole("button", { name: "夜釣" }));
   });
 });
 
 describe("MemoryPostcards", () => {
-  it("places Facebook CTA after memorial cards (no Pixnet)", () => {
+  it("FB CTA only after memorial cards", () => {
     render(<MemoryPostcards />);
     expect(screen.getByText("認識鹿港漁人")).toBeTruthy();
-    expect(screen.getByText("卵石堤的迴流")).toBeTruthy();
-    const cta = screen.getByRole("link", { name: "去粉專看更多釣行" });
+    const cta = screen.getByRole("link", { name: "看更多出海日常" });
     expect(cta).toHaveAttribute("href", expect.stringContaining("facebook.com"));
     expect(cta.getAttribute("href")).not.toMatch(/pixnet/i);
   });

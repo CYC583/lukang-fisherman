@@ -1,29 +1,50 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { getSite } from "@/lib/content";
+import { useSoundOptional } from "./SoundContext";
 
-/** Magazine-cover hero matching the approved 紙白＋霧金 mockup. */
+/** Magazine-cover hero — paper+gold mockup with animated ocean video (not static). */
 export function HeroCover() {
   const site = getSite();
+  const { soundOn } = useSoundOptional();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true; // cover always muted; ambient handled separately
+    const p = v.play();
+    if (p && typeof p.catch === "function") p.catch(() => {});
+  }, [soundOn]);
+
   return (
     <section
       aria-label="封面"
       className="relative flex min-h-dvh w-full flex-col items-center justify-center overflow-hidden"
     >
-      {/* Full-bleed cover photo */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/media/hero-cover.jpg"
-        alt="鹿港漁人礁岩海岸"
-        className="absolute inset-0 h-full w-full object-cover"
-        fetchPriority="high"
-      />
-      {/* Soft paper wash + vignette so gold type pops */}
+      {/* Animated ocean — slow cinematic loop + subtle Ken Burns scale */}
+      <div className="absolute inset-0 overflow-hidden">
+        <video
+          ref={videoRef}
+          src="/media/dad-cover-cinematic.mp4"
+          poster="/media/hero-cover.jpg"
+          aria-label="鹿港漁人礁岩海岸"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="hero-kenburns absolute inset-0 h-full w-full object-cover"
+        />
+      </div>
       <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-indigo)]/45 via-[var(--color-indigo)]/25 to-[var(--color-indigo)]/70" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(11,28,44,0.55)_100%)]" />
 
+      {/* Soft drifting light shimmer */}
+      <div className="hero-shimmer pointer-events-none absolute inset-0 opacity-30" aria-hidden />
+
       <div className="relative z-10 flex max-w-sm flex-col items-center px-6 py-16 text-center">
-        {/* Vertical gold title block — magazine spine feel */}
         <div className="flex flex-col items-center gap-5">
           <p className="text-[10px] tracking-[0.55em] text-[var(--color-gold)]/90">ISOFISHING · TAIWAN</p>
           <h1
@@ -60,18 +81,15 @@ export function HeroCover() {
         </div>
       </div>
 
-      {/* Soft seafoam wave hint at bottom — decorative only, not a 3-button nav */}
+      {/* Animated seafoam wave at bottom — decorative only */}
       <svg
-        className="pointer-events-none absolute bottom-0 left-0 w-full opacity-40"
+        className="pointer-events-none absolute bottom-0 left-0 w-full opacity-50"
         viewBox="0 0 400 48"
         preserveAspectRatio="none"
         aria-hidden
-        height="36"
+        height="40"
       >
-        <path
-          d="M0 30 Q50 10 100 28 T200 28 T300 28 T400 28 V48 H0 Z"
-          fill="var(--color-seafoam)"
-        />
+        <path className="hero-wave" d="M0 30 Q50 10 100 28 T200 28 T300 28 T400 28 V48 H0 Z" fill="var(--color-seafoam)" />
       </svg>
     </section>
   );

@@ -1,6 +1,5 @@
 import { getSite } from "@/lib/content";
 
-/** Compact CTA pair (also used by tests). Hero cover embeds the same links inline. */
 export function HeroCta() {
   const site = getSite();
   return (

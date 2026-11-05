@@ -1,6 +1,5 @@
 import { getSite } from "@/lib/content";
 
-/** Post-story CTA — Facebook only (Pixnet removed per owner request). */
 export function BlogCta() {
   const site = getSite();
   return (

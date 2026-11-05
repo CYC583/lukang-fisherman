@@ -1,6 +1,7 @@
 "use client";
 
 import { getSite } from "@/lib/content";
+import { sfx } from "@/lib/sfx";
 import { useSound } from "./SoundContext";
 
 export function SoundGate() {
@@ -30,7 +31,11 @@ export function SoundGate() {
       <div className="flex w-full max-w-xs flex-col gap-3">
         <button
           type="button"
-          onClick={() => choose(true)}
+          onClick={() => {
+            sfx.confirm();
+            sfx.splash();
+            choose(true);
+          }}
           className="rounded-full bg-[var(--color-gold)] px-6 py-4 text-center text-base font-bold tracking-[0.3em] text-[var(--color-indigo)] shadow-lg transition active:scale-95"
         >
           {site.soundYes}

@@ -1,0 +1,11 @@
+{
+  "prompt": "猜這尾幾公斤？",
+  "image": "/media/fb/post_gallery_2_590.jpg",
+  "choices": [
+    { "id": "a", "label": "約 0.8 kg" },
+    { "id": "b", "label": "約 1.5 kg" },
+    { "id": "c", "label": "約 2.5 kg" }
+  ],
+  "answerId": "b",
+  "reveal": "大約一公斤半左右——剛上岸的黑鯛，銀鱗還亮著。重量不重要，重要的是那一下竿尖沉下去的感覺。"
+}

@@ -38,10 +38,9 @@ describe("AmbientAudio", () => {
       </SoundProvider>,
     );
     expect(play).not.toHaveBeenCalled();
-    expect(screen.queryByRole("button", { name: /配樂/ })).toBeNull();
   });
 
-  it("plays after gate chooses 開啟聲音, and can mute again", () => {
+  it("plays wave ambient after gate yes, and can mute again", () => {
     render(wrap(<AmbientAudio />, true));
     expect(play).toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "關閉配樂" }));

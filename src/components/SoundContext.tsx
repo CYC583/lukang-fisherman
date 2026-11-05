@@ -10,7 +10,6 @@ import {
 } from "react";
 
 type SoundCtx = {
-  /** null = not chosen yet (gate visible) */
   soundOn: boolean | null;
   choose: (on: boolean) => void;
   toggle: () => void;
@@ -30,4 +29,15 @@ export function useSound() {
   const ctx = useContext(Ctx);
   if (!ctx) throw new Error("useSound must be used within SoundProvider");
   return ctx;
+}
+
+/** Safe for presentational pieces rendered in isolation (tests). */
+export function useSoundOptional(): SoundCtx {
+  return (
+    useContext(Ctx) ?? {
+      soundOn: null,
+      choose: () => {},
+      toggle: () => {},
+    }
+  );
 }

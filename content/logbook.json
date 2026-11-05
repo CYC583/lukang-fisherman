@@ -1,0 +1,38 @@
+[
+  {
+    "id": "eddy-black",
+    "date": "2024·春",
+    "place": "台南港附近 · 卵石堤",
+    "species": "黑鯛",
+    "tags": ["夜釣", "台南港"],
+    "line": "迴流處一送，黑鯛就在腳邊。",
+    "image": "/media/fb/post_gallery_1_590.jpg"
+  },
+  {
+    "id": "silver-first",
+    "date": "2024·夏",
+    "place": "西岸磯場",
+    "species": "黑鯛",
+    "tags": ["磯釣"],
+    "line": "銀鱗還帶海水，線還在嘴邊——剛上岸的瞬間。",
+    "image": "/media/fb/post_gallery_2_590.jpg"
+  },
+  {
+    "id": "yellow-fin",
+    "date": "2023·秋",
+    "place": "布袋外海礁區",
+    "species": "黃錫鯛",
+    "tags": ["磯釣", "路亞"],
+    "line": "尾鰭一抹金黃，像霧金落在紙白上。",
+    "image": "/media/fb/post_gallery_3_590.jpg"
+  },
+  {
+    "id": "armed",
+    "date": "日常",
+    "place": "鹿港出發",
+    "species": "本日漁獲",
+    "tags": ["磯釣"],
+    "line": "背心、遮陽、竿子夾腋下——穩穩站在磯上。",
+    "image": "/media/fb/post_older_4_590.jpg"
+  }
+]

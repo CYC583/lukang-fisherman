@@ -1,0 +1,23 @@
+[
+  {
+    "id": "black-porgy",
+    "name": "黑鯛",
+    "aka": "螺底的智者",
+    "blurb": "看海像剝洋蔥——浪腳、迴流、卵石堆。餌順著流送，像放風箏一樣耐心。",
+    "image": "/media/fb/post_gallery_2_590.jpg"
+  },
+  {
+    "id": "yellowfin",
+    "name": "黃錫鯛",
+    "aka": "金尾的光",
+    "blurb": "尾鰭透著金黃，磯邊一尾就夠讓整晚車程值得。",
+    "image": "/media/fb/post_gallery_3_590.jpg"
+  },
+  {
+    "id": "catch-of-day",
+    "name": "當日戰果",
+    "aka": "師傅日常",
+    "blurb": "全副武裝，竿夾腋下。釣友喊一聲師傅，海一直在。",
+    "image": "/media/fb/post_older_4_590.jpg"
+  }
+]
