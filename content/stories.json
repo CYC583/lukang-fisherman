@@ -1,35 +1,50 @@
 [
   {
-    "id": "duel",
-    "title": "與黑鯛對智",
-    "body": "看海像剝洋蔥，一層一層讀：浪腳、迴流、卵石堆。餌順著流送出去，像放風箏一樣耐心。黑鯛很精，但漁人更懂牠們會躲在哪裡。",
-    "media": {
-      "type": "video",
-      "src": "/media/dad-catch-cinematic.mp4",
-      "alt": "黑鯛戰果特寫",
-      "credit": "鹿港漁人 Facebook 公開貼文（漁獲圖融合短片）"
-    }
-  },
-  {
-    "id": "expedition",
-    "title": "半夜出發，凌晨登礁",
-    "body": "別人還在睡，他已經備好餌、一路南下。天還沒亮就踩上礁岩，等潮一轉，第一尾上鉤——那一刻，整晚的車程都值得了。",
+    "id": "open-sea",
+    "chapter": "01",
+    "title": "與海的靜默對話",
+    "narration": [
+      "天還沒亮，車燈切過台十七線。",
+      "磯岩在霧裡，浪一層一層翻。",
+      "他說：看海像剝洋蔥——浪腳、迴流、卵石堆。"
+    ],
     "media": {
       "type": "video",
       "src": "/media/dad-cover-cinematic.mp4",
       "alt": "鹿港漁人礁岩海岸",
-      "credit": "鹿港漁人 Facebook 公開封面／貼文（礁岩融合短片）"
+      "credit": "鹿港漁人 Facebook 公開封面／貼文"
     }
   },
   {
-    "id": "now",
+    "id": "duel",
+    "chapter": "02",
+    "title": "與黑鯛對智",
+    "narration": [
+      "餌順著流送出去，像放風箏一樣耐心。",
+      "黑鯛很精，但漁人更懂牠們會躲在哪裡。",
+      "竿尖一沉——上了。"
+    ],
+    "media": {
+      "type": "video",
+      "src": "/media/dad-catch-cinematic.mp4",
+      "alt": "黑鯛戰果特寫",
+      "credit": "鹿港漁人 Facebook 公開貼文"
+    }
+  },
+  {
+    "id": "still-casting",
+    "chapter": "03",
     "title": "現在，還在釣",
-    "body": "從磯釣到前打，十年來沒停過。粉專還在更新，釣友喊他一聲師傅。海一直在，鹿港漁人也一直在。",
+    "narration": [
+      "從磯釣到前打，十年來沒停過。",
+      "釣友喊他一聲師傅。",
+      "海一直在，鹿港漁人也一直在。"
+    ],
     "media": {
       "type": "video",
       "src": "/media/story-reef-dawn.mp4",
       "alt": "清晨磯場",
-      "credit": "抽象磯場佔位短片；可改換粉專公開素材融合版"
+      "credit": "磯場氛圍短片"
     }
   }
 ]

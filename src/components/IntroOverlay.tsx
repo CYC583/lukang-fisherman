@@ -2,9 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SkipIntro } from "./SkipIntro";
+import { useSound } from "./SoundContext";
 
-const DURATION_MS = 2800;
+const DURATION_MS = 2200;
 
+/** Brief brand flash after sound choice; skippable. Does not fight SoundGate. */
 export function IntroOverlay({ onDone }: { onDone: () => void }) {
   const [leaving, setLeaving] = useState(false);
   const done = useRef(false);
@@ -23,7 +25,7 @@ export function IntroOverlay({ onDone }: { onDone: () => void }) {
       finish();
       return;
     }
-    const fade = setTimeout(() => setLeaving(true), DURATION_MS - 500);
+    const fade = setTimeout(() => setLeaving(true), DURATION_MS - 400);
     const end = setTimeout(finish, DURATION_MS);
     return () => {
       clearTimeout(fade);
@@ -36,7 +38,7 @@ export function IntroOverlay({ onDone }: { onDone: () => void }) {
     <div
       role="dialog"
       aria-label="開場"
-      className={`fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-[var(--color-paper)] text-[var(--color-indigo)] transition-opacity duration-500 ${leaving ? "opacity-0" : "opacity-100"}`}
+      className={`fixed inset-0 z-[70] flex flex-col items-center justify-center gap-6 bg-[var(--color-paper)] text-[var(--color-indigo)] transition-opacity duration-500 ${leaving ? "opacity-0" : "opacity-100"}`}
     >
       <SkipIntro onSkip={finish} />
       <svg width="160" height="40" viewBox="0 0 160 40" aria-hidden className="animate-pulse">
@@ -49,6 +51,11 @@ export function IntroOverlay({ onDone }: { onDone: () => void }) {
 }
 
 export function IntroGate() {
+  const { soundOn } = useSound();
   const [show, setShow] = useState(true);
-  return show ? <IntroOverlay onDone={() => setShow(false)} /> : null;
+
+  // Wait until sound is chosen; then show brief intro (or skip if already dismissed).
+  if (soundOn === null) return null;
+  if (!show) return null;
+  return <IntroOverlay onDone={() => setShow(false)} />;
 }

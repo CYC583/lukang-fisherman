@@ -1,6 +1,26 @@
+import type { ReactNode } from "react";
+import { useEffect } from "react";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { AmbientAudio } from "@/components/AmbientAudio";
+import { SoundProvider, useSound } from "@/components/SoundContext";
+
+function ChooseSound({ on }: { on: boolean }) {
+  const { choose } = useSound();
+  useEffect(() => {
+    choose(on);
+  }, [choose, on]);
+  return null;
+}
+
+function wrap(ui: ReactNode, soundOn: boolean) {
+  return (
+    <SoundProvider>
+      <ChooseSound on={soundOn} />
+      {ui}
+    </SoundProvider>
+  );
+}
 
 describe("AmbientAudio", () => {
   afterEach(cleanup);
@@ -10,15 +30,20 @@ describe("AmbientAudio", () => {
     window.HTMLMediaElement.prototype.play = play as never;
     window.HTMLMediaElement.prototype.pause = vi.fn();
   });
-  it("is muted by default and does not autoplay", () => {
-    render(<AmbientAudio />);
-    expect(screen.getByRole("button", { name: "開啟配樂" })).toBeTruthy();
+
+  it("does not play until sound gate chooses on", () => {
+    render(
+      <SoundProvider>
+        <AmbientAudio />
+      </SoundProvider>,
+    );
     expect(play).not.toHaveBeenCalled();
+    expect(screen.queryByRole("button", { name: /配樂/ })).toBeNull();
   });
-  it("plays only after tap, and can mute again", () => {
-    render(<AmbientAudio />);
-    fireEvent.click(screen.getByRole("button", { name: "開啟配樂" }));
-    expect(play).toHaveBeenCalledTimes(1);
+
+  it("plays after gate chooses 開啟聲音, and can mute again", () => {
+    render(wrap(<AmbientAudio />, true));
+    expect(play).toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "關閉配樂" }));
     expect(screen.getByRole("button", { name: "開啟配樂" })).toBeTruthy();
   });

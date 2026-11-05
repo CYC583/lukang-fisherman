@@ -1,23 +1,24 @@
+import { SoundProvider } from "@/components/SoundContext";
+import { SoundGate } from "@/components/SoundGate";
 import { IntroGate } from "@/components/IntroOverlay";
-import { HeroCta } from "@/components/HeroCta";
-import { StorySection } from "@/components/StorySection";
+import { HeroCover } from "@/components/HeroCover";
+import { StoryCinema } from "@/components/StoryCinema";
+import { MemoryPostcards } from "@/components/MemoryPostcards";
 import { AmbientAudio } from "@/components/AmbientAudio";
 import { SiteFooter } from "@/components/SiteFooter";
-import { getSite } from "@/lib/content";
 
 export default function Home() {
-  const site = getSite();
   return (
-    <main className="min-h-dvh bg-[var(--color-paper)] text-[var(--color-indigo)]">
-      <IntroGate />
-      <section className="flex min-h-dvh flex-col items-center justify-center gap-8 p-6">
-        <h1 className="text-4xl font-bold tracking-[0.3em]">{site.title}</h1>
-        <div className="h-px w-16 bg-[var(--color-gold)]" />
-        <HeroCta />
-      </section>
-      <StorySection />
-      <SiteFooter />
-      <AmbientAudio />
-    </main>
+    <SoundProvider>
+      <main className="min-h-dvh bg-[var(--color-paper)] text-[var(--color-indigo)]">
+        <SoundGate />
+        <IntroGate />
+        <HeroCover />
+        <StoryCinema />
+        <MemoryPostcards />
+        <SiteFooter />
+        <AmbientAudio />
+      </main>
+    </SoundProvider>
   );
 }
