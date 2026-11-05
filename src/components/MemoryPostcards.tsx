@@ -1,9 +1,17 @@
+"use client";
+
 import { getMemories, getSite } from "@/lib/content";
+import { sfx } from "@/lib/sfx";
+import { useSoundOptional } from "./SoundContext";
 
 /** Cute memorial sticker / postcard cards from curated public FB posts. */
 export function MemoryPostcards() {
   const memories = getMemories();
   const site = getSite();
+  const { soundOn } = useSoundOptional();
+  const tap = () => {
+    if (soundOn === true) sfx.tap();
+  };
 
   return (
     <section
@@ -57,6 +65,7 @@ export function MemoryPostcards() {
           href={site.facebookUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={tap}
           className="block w-full rounded-full bg-[var(--color-indigo)] px-6 py-4 text-center text-base font-bold tracking-[0.28em] text-[var(--color-paper)] shadow-md transition active:scale-95"
         >
           {site.afterStoryCta}
@@ -65,6 +74,7 @@ export function MemoryPostcards() {
           href={site.facebookUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={tap}
           className="text-xs tracking-widest text-[var(--color-indigo)]/60 underline underline-offset-4"
         >
           {site.primaryCta} → Facebook

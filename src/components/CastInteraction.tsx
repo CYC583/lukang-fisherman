@@ -12,12 +12,14 @@ export function CastInteraction({ onDone }: { onDone?: () => void }) {
 
   const finish = (s: "cast" | "skipped") => {
     if (state !== "idle") return;
-    if (soundOn) {
+    if (soundOn === true) {
       if (s === "cast") {
         sfx.cast();
-        setTimeout(() => sfx.hook(), 280);
+        window.setTimeout(() => sfx.hook(), 280);
+        window.setTimeout(() => sfx.splash(), 520);
       } else {
         sfx.tap();
+        window.setTimeout(() => sfx.hook(), 160);
       }
     }
     setState(s);

@@ -28,9 +28,14 @@ export function GuessWeight() {
                   key={c.id}
                   type="button"
                   onClick={() => {
-                    if (soundOn) sfx.tap();
+                    if (soundOn === true) sfx.tap();
                     setPicked(c.id);
-                    if (soundOn) setTimeout(() => (c.id === g.answerId ? sfx.confirm() : sfx.splash()), 120);
+                    if (soundOn === true) {
+                      window.setTimeout(
+                        () => (c.id === g.answerId ? sfx.confirm() : sfx.splash()),
+                        120,
+                      );
+                    }
                   }}
                   className="rounded-full border border-[var(--color-gold)]/50 px-4 py-3 text-sm tracking-widest transition active:scale-95"
                 >

@@ -4,10 +4,12 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
 } from "react";
+import { setSfxEnabled } from "@/lib/sfx";
 
 type SoundCtx = {
   soundOn: boolean | null;
@@ -21,6 +23,11 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   const [soundOn, setSoundOn] = useState<boolean | null>(null);
   const choose = useCallback((on: boolean) => setSoundOn(on), []);
   const toggle = useCallback(() => setSoundOn((s) => (s === null ? true : !s)), []);
+
+  useEffect(() => {
+    setSfxEnabled(soundOn === true);
+  }, [soundOn]);
+
   const value = useMemo(() => ({ soundOn, choose, toggle }), [soundOn, choose, toggle]);
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

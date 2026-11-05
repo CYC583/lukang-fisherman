@@ -1,7 +1,7 @@
 "use client";
 
 import { getSite } from "@/lib/content";
-import { sfx } from "@/lib/sfx";
+import { setSfxEnabled, sfx } from "@/lib/sfx";
 import { useSound } from "./SoundContext";
 
 export function SoundGate() {
@@ -32,6 +32,7 @@ export function SoundGate() {
         <button
           type="button"
           onClick={() => {
+            setSfxEnabled(true);
             sfx.confirm();
             sfx.splash();
             choose(true);
@@ -42,7 +43,10 @@ export function SoundGate() {
         </button>
         <button
           type="button"
-          onClick={() => choose(false)}
+          onClick={() => {
+            setSfxEnabled(false);
+            choose(false);
+          }}
           className="rounded-full border border-[var(--color-paper)]/50 bg-transparent px-6 py-3.5 text-center text-sm tracking-[0.3em] text-[var(--color-paper)] transition active:scale-95"
         >
           {site.soundNo}

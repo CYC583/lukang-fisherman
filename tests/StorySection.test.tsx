@@ -34,7 +34,7 @@ describe("StorySection", () => {
 
 describe("SeaLogbook", () => {
   it("shows logbook cards and filters", () => {
-    render(<SeaLogbook />);
+    render(wrap(<SeaLogbook />));
     expect(screen.getByText("出海日誌")).toBeTruthy();
     expect(screen.getAllByText("黑鯛").length).toBeGreaterThanOrEqual(1);
     fireEvent.click(screen.getByRole("button", { name: "夜釣" }));

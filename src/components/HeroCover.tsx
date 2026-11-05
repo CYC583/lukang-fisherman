@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { getSite } from "@/lib/content";
+import { sfx } from "@/lib/sfx";
 import { useSoundOptional } from "./SoundContext";
 
 /** Magazine-cover hero — paper+gold mockup with animated ocean video (not static). */
@@ -17,6 +18,18 @@ export function HeroCover() {
     const p = v.play();
     if (p && typeof p.catch === "function") p.catch(() => {});
   }, [soundOn]);
+
+  /* Soft wave accents over ambient bed while sound is on */
+  useEffect(() => {
+    if (soundOn !== true) return;
+    sfx.wave();
+    const id = window.setInterval(() => sfx.wave(), 7800);
+    return () => window.clearInterval(id);
+  }, [soundOn]);
+
+  const tap = () => {
+    if (soundOn === true) sfx.tap();
+  };
 
   return (
     <section
@@ -68,12 +81,14 @@ export function HeroCover() {
             href={site.facebookUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={tap}
             className="block w-full rounded-full bg-[var(--color-gold)] px-6 py-4 text-center text-base font-bold tracking-[0.28em] text-[var(--color-indigo)] shadow-[0_8px_28px_rgba(198,167,94,0.35)] transition active:scale-95"
           >
             {site.primaryCta}
           </a>
           <a
             href="#story"
+            onClick={tap}
             className="block w-full rounded-full border border-[var(--color-gold)]/70 bg-[var(--color-paper)]/10 px-6 py-3.5 text-center text-sm tracking-[0.28em] text-[var(--color-paper)] backdrop-blur-sm transition active:scale-95"
           >
             {site.storyCta}

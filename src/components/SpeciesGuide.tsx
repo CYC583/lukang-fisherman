@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 import { getSpecies } from "@/lib/content";
+import { sfx } from "@/lib/sfx";
+import { useSound } from "./SoundContext";
 
 /** 魚種圖鑑 — tap for photo + short intro (brag, no buy). */
 export function SpeciesGuide() {
   const list = getSpecies();
+  const { soundOn } = useSound();
   const [open, setOpen] = useState<string | null>(list[0]?.id ?? null);
   const current = list.find((s) => s.id === open) ?? list[0];
 
@@ -20,7 +23,10 @@ export function SpeciesGuide() {
           <button
             key={s.id}
             type="button"
-            onClick={() => setOpen(s.id)}
+            onClick={() => {
+              if (soundOn === true) sfx.tap();
+              setOpen(s.id);
+            }}
             className={`rounded-full px-4 py-2 text-sm tracking-widest transition ${
               open === s.id
                 ? "bg-[var(--color-gold)] text-[var(--color-indigo)]"

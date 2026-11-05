@@ -2,12 +2,15 @@
 
 import { useMemo, useState } from "react";
 import { getLogbook } from "@/lib/content";
+import { sfx } from "@/lib/sfx";
+import { useSound } from "./SoundContext";
 
 const ALL = "全部";
 
 /** 出海日誌 — timeline cards with optional tag filters. */
 export function SeaLogbook() {
   const entries = getLogbook();
+  const { soundOn } = useSound();
   const tags = useMemo(() => {
     const s = new Set<string>();
     entries.forEach((e) => e.tags.forEach((t) => s.add(t)));
@@ -29,7 +32,10 @@ export function SeaLogbook() {
           <button
             key={t}
             type="button"
-            onClick={() => setFilter(t)}
+            onClick={() => {
+              if (soundOn === true) sfx.tap();
+              setFilter(t);
+            }}
             className={`rounded-full px-3 py-1.5 text-[11px] tracking-widest transition ${
               filter === t
                 ? "bg-[var(--color-indigo)] text-[var(--color-paper)]"

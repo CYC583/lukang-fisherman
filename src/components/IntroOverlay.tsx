@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { sfx } from "@/lib/sfx";
 import { SkipIntro } from "./SkipIntro";
 import { useSound } from "./SoundContext";
 
@@ -12,6 +13,7 @@ export function IntroOverlay({ onDone }: { onDone: () => void }) {
   const [leaving, setLeaving] = useState(false);
   const done = useRef(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const opened = useRef(false);
 
   const finish = () => {
     if (done.current) return;
@@ -25,6 +27,11 @@ export function IntroOverlay({ onDone }: { onDone: () => void }) {
       v.muted = soundOn !== true;
       const p = v.play();
       if (p && typeof p.catch === "function") p.catch(() => {});
+    }
+    if (soundOn === true && !opened.current) {
+      opened.current = true;
+      sfx.opener();
+      setTimeout(() => sfx.wave(), 480);
     }
     const reduce =
       typeof window !== "undefined" &&
