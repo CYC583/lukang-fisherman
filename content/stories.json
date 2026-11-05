@@ -6,7 +6,8 @@
     "media": {
       "type": "video",
       "src": "/media/dad-catch-cinematic.mp4",
-      "alt": "黑鯛戰果特寫"
+      "alt": "黑鯛戰果特寫",
+      "credit": "鹿港漁人 Facebook 公開貼文（漁獲圖融合短片）"
     }
   },
   {
@@ -16,7 +17,8 @@
     "media": {
       "type": "video",
       "src": "/media/dad-cover-cinematic.mp4",
-      "alt": "鹿港漁人礁岩海岸"
+      "alt": "鹿港漁人礁岩海岸",
+      "credit": "鹿港漁人 Facebook 公開封面／貼文（礁岩融合短片）"
     }
   },
   {
@@ -26,7 +28,8 @@
     "media": {
       "type": "video",
       "src": "/media/story-reef-dawn.mp4",
-      "alt": "清晨磯場"
+      "alt": "清晨磯場",
+      "credit": "抽象磯場佔位短片；可改換粉專公開素材融合版"
     }
   }
 ]
