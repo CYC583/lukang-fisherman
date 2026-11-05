@@ -1,5 +1,7 @@
 import { IntroGate } from "@/components/IntroOverlay";
 import { HeroCta } from "@/components/HeroCta";
+import { StorySection } from "@/components/StorySection";
+import { SiteFooter } from "@/components/SiteFooter";
 import { getSite } from "@/lib/content";
 
 export default function Home() {
@@ -12,6 +14,8 @@ export default function Home() {
         <div className="h-px w-16 bg-[var(--color-gold)]" />
         <HeroCta />
       </section>
+      <StorySection />
+      <SiteFooter />
     </main>
   );
 }
