@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cap-crest",
+    "name": "白帽 · 金徽",
+    "brand": "Crest Cap",
+    "blurb": "霧白帽壓低＋金色盾徽與月桂葉——粉專一眼就能認人的招牌頂。",
+    "x": 48,
+    "y": 8,
+    "image": "/media/fb/refs/ref_gear_full.jpg",
+    "focus": "center 8%"
+  },
+  {
+    "id": "sunline",
+    "name": "SUNLINE",
+    "brand": "SUNLINE",
+    "blurb": "左胸金色 SUNLINE 獅／太陽標——線材本命，磯上配色一眼高階。",
+    "x": 36,
+    "y": 32,
+    "image": "/media/fb/refs/ref_gear_full.jpg",
+    "focus": "36% 32%"
+  },
+  {
+    "id": "limited-pro",
+    "name": "LIMITED PRO",
+    "brand": "SHIMANO LIMITED PRO",
+    "blurb": "右袖直書 LIMITED PRO——禧瑪諾限量線，紅字在肩臂間很有存在感。",
+    "x": 78,
+    "y": 38,
+    "image": "/media/fb/refs/ref_gear_full.jpg",
+    "focus": "78% 38%"
+  },
+  {
+    "id": "shimano",
+    "name": "SHIMANO",
+    "brand": "SHIMANO",
+    "blurb": "左袖／腕側 SHIMANO——整套技術層的本體署名。",
+    "x": 22,
+    "y": 62,
+    "image": "/media/fb/refs/ref_gear_full.jpg",
+    "focus": "22% 62%"
+  },
+  {
+    "id": "buff",
+    "name": "蒙面頭巾",
+    "brand": "Buff / Neck gaiter",
+    "blurb": "藍綠花紋頭巾拉高＋白帽壓低——西岸烈日與鹽霧裡的標準作戰臉。",
+    "x": 50,
+    "y": 18,
+    "image": "/media/fb/refs/ref_gear_full.jpg",
+    "focus": "50% 18%"
+  },
+  {
+    "id": "rod",
+    "name": "磯竿",
+    "brand": "Rod",
+    "blurb": "黑竿身細紅導環斜切畫面——掛在肩腋間隨時可站起來拋下一竿。",
+    "x": 70,
+    "y": 55,
+    "image": "/media/fb/refs/ref_gear_full.jpg",
+    "focus": "70% 55%"
+  }
+]

@@ -1,35 +1,47 @@
 # Spots & media notes
 
-更新時間：2026-11-06 Asia/Taipei（雜事 scrape；未改 React、未 deploy、未 push）
+更新時間：2026-11-06 Asia/Taipei（FB permalink 合併；未改 React、未 deploy、未 push）
 
 ## Hard rules（YC）
 1. **1:1** — 地圖點＝公開貼文／釣行文有具名（或文內可辨）釣點者；不灌水、不拿 logbook 4 筆充數。
 2. **原文連結** — 每筆必有 `postUrl`（與 `sourceUrl` 同值）。
-3. **圖文綁定** — `image` 必須來自該篇文內圖（`imageSourceUrl` 可追溯）；禁止張冠李戴。
+3. **圖文綁定** — `image` 必須來自該篇文內圖（`imageSourceUrl` 可追溯）；禁止張冠李戴。FB 新點若尚無本機原文圖，暫用同場系／通用漁獲圖並在 `imageNote` 標「待下載替換」。
 
 ## 統計（目前對上）
 
 | 來源 | 可列公開文／點 | 已寫入 `spots.json` | 備註 |
 | --- | --- | --- | --- |
-| 痞客邦釣行／釣點文 | **17** | **17** | 每筆皆有 `postUrl`＋同篇圖 |
-| Facebook 粉專貼文 | **0（本輪）** | **0** | **Blocker：登入／錯誤牆** |
-| **合計地圖點** | — | **17** | 全 `approx: true`（公開海岸近似座標） |
+| 痞客邦釣行／釣點文 | **17** | **17** | 每筆皆有 `postUrl`＋同篇圖（**未刪**） |
+| Facebook 粉專貼文 | **5（完整 pfbid）** | **5** | 另有 5 筆僅截斷 prefix → **未寫入**（無完整 `postUrl`） |
+| **合計地圖點** | — | **22** | 全 `approx: true` |
 
-粉專 URL（僅粉專首頁，非單篇 permalink）：  
-https://www.facebook.com/people/鹿港漁人/100063821466190/
+粉專 URL：https://www.facebook.com/people/鹿港漁人/100063821466190/
 
-### Facebook blocker
-- `facebook.com` / `m.facebook.com` → HTTP 400「Sorry, something went wrong」
-- `mbasic.facebook.com` → 導向登入牆，無公開貼文 HTML／`story_fbid`
-- 既有本機 `public/media/fb/post_gallery_*.jpg`、`post_older_4_590.jpg` 來自粉專公開圖素材庫，**但本輪拿不到單篇 permalink**，故**不**塞進 `spots.json`（避免無 `postUrl` 違規）。
-- 解法：人工作業從粉專複製各貼文 permalink，或登入後匯出後再 1:1 補 FB 點。
+### Facebook 本輪合併
+- 登入後從粉專牆抓到 **3** 個完整 permalink（好美長文／黑牛淺場／卵石堆迴流）。
+- 盤點另提供 **2** 個完整 `story_fbid`（留言線索：黑牛／沙格、澎湖飛回）→ 已寫入，`confidence: provisional`。
+- **未寫入**（僅截斷 id，禁止瞎編 suffix）：`pfbid02yYgNz…`、`pfbid02FpaqU…`、`pfbid0mV5fen…`、`pfbid026s57U…`、`pfbid02i9w3Y…`。補齊完整 pfbid 後再 append。
+- 卵石堆 permalink 以 scrape 為準：`…Q9nGH5ue…`（非早期筆記的 `Q9GH`）。
+- FB 點圖片皆 `imageNote` 標 pending 原文圖下載；同場系暫用布袋／東嶼坪痞客邦圖或本機 gallery／catch。
 
 ### 痞客邦範圍
 部落格：https://nokia1301471980.pixnet.net/blog  
 本輪索引＝首頁可見活動紀錄＋搜尋補到的較舊釣行文（RSS／archive 路徑空）。  
 未納入：純轉載心得文（例：`10251082685` 子線轉載，無釣點）。
 
-## `content/spots.json` 一覽（17）
+## `content/spots.json` 一覽（22＝5 FB + 17 pixnet）
+
+### Facebook（5）
+
+| id | name | story_fbid 前綴 | 魚種／備註 |
+| --- | --- | --- | --- |
+| fb-02PxbAXS | 嘉義 · 好美漁港（卵石／消波磚） | pfbid02PxbAX… | 黑鯛、花身雞魚、成仔丁；2026-10-20 |
+| fb-02iUtacK | 本島岸磯 · 淺場（黑牛） | pfbid02iUtac… | 黑牛／黑鯛；未具名堤 → provisional |
+| fb-0sEwGtM4 | 卵石堆迴流處 | pfbid0sEwGt… | 黑鯛、紅鰽 |
+| fb-02seJhuG | 粉專釣行 · 黑牛／沙格 | pfbid02seJhu… | 留言線索；provisional |
+| fb-02PwVphQ | 澎湖 · 釣行飛回 | pfbid02PwVph… | 留言線索；provisional |
+
+### 痞客邦（17，保留）
 
 | id | name | postUrl | 魚種（文內） |
 | --- | --- | --- | --- |

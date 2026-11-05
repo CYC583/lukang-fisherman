@@ -38,7 +38,8 @@ describe("HeroCover", () => {
       "href",
       expect.stringContaining("pixnet.net"),
     );
-    expect(screen.getByRole("link", { name: "打開釣點地圖" })).toHaveAttribute("href", "#map");
+    expect(screen.getByRole("link", { name: "打開釣場地球" })).toHaveAttribute("href", "#map");
+    expect(screen.getByRole("link", { name: "看裝備牆" })).toHaveAttribute("href", "#gear");
     expect(screen.queryByText("磯釣系列")).toBeNull();
     expect(screen.queryByText("釣友會想傳的幾張")).toBeNull();
     expect(container.querySelector('video[src="/media/cover-loop.mp4"]')).toBeTruthy();
