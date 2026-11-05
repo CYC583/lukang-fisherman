@@ -203,7 +203,7 @@ export function MemoryPostcards() {
         })}
       </div>
 
-      <div className="mx-auto mt-14 max-w-sm px-6 text-center">
+      <div className="mx-auto mt-14 flex max-w-sm flex-col gap-2.5 px-6 text-center">
         <a
           href={site.facebookUrl}
           target="_blank"
@@ -216,7 +216,24 @@ export function MemoryPostcards() {
             color: "var(--color-indigo)",
             fontFamily: "var(--font-display)",
             fontSize: "0.875rem",
-            letterSpacing: "0.28em",
+            letterSpacing: "0.22em",
+          }}
+        >
+          {site.primaryCta}
+        </a>
+        <a
+          href={site.pixnetUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={tap}
+          className="flex w-full items-center justify-center transition active:opacity-90"
+          style={{
+            minHeight: 48,
+            border: "1px solid rgba(197,160,89,0.7)",
+            color: "var(--color-gold)",
+            fontFamily: "var(--font-display)",
+            fontSize: "0.875rem",
+            letterSpacing: "0.22em",
           }}
         >
           {site.secondaryCta}

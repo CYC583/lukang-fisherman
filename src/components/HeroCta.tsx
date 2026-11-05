@@ -1,35 +1,37 @@
 import { getSite } from "@/lib/content";
 
-/** Dual CTAs — primary story (#logbook), secondary FB only. */
+/** Large destination CTAs — Facebook + Pixnet. */
 export function HeroCta() {
   const site = getSite();
   return (
     <div className="flex w-full max-w-sm flex-col gap-2.5">
       <a
-        href="#logbook"
+        href={site.facebookUrl}
+        target="_blank"
+        rel="noopener noreferrer"
         className="flex items-center justify-center font-bold"
         style={{
-          minHeight: 52,
+          minHeight: 56,
           background: "var(--color-gold)",
           color: "var(--color-indigo)",
-          fontSize: "0.9375rem",
-          letterSpacing: "0.28em",
+          fontSize: "1rem",
+          letterSpacing: "0.22em",
           fontFamily: "var(--font-display)",
         }}
       >
         {site.primaryCta}
       </a>
       <a
-        href={site.facebookUrl}
+        href={site.pixnetUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center"
+        className="flex items-center justify-center font-bold"
         style={{
-          minHeight: 48,
-          border: "1px solid rgba(197,160,89,0.75)",
-          color: "var(--color-indigo)",
-          fontSize: "0.875rem",
-          letterSpacing: "0.28em",
+          minHeight: 56,
+          background: "var(--color-indigo)",
+          color: "var(--color-paper)",
+          fontSize: "1rem",
+          letterSpacing: "0.22em",
           fontFamily: "var(--font-display)",
         }}
       >

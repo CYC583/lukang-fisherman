@@ -6,7 +6,8 @@
     "species": "黑鯛",
     "tags": ["夜釣", "台南港"],
     "line": "迴流一送，黑鯛咬在腳邊。",
-    "image": "/media/fb/post_gallery_1_590.jpg"
+    "image": "/media/fb/post_gallery_1_590.jpg",
+    "spotId": "tainan-harbor-eddy"
   },
   {
     "id": "silver-first",
@@ -15,7 +16,8 @@
     "species": "黑鯛",
     "tags": ["磯釣"],
     "line": "銀鱗帶水，線還掛在嘴邊。",
-    "image": "/media/fb/post_gallery_2_590.jpg"
+    "image": "/media/fb/post_gallery_2_590.jpg",
+    "spotId": "west-coast-iso"
   },
   {
     "id": "yellow-fin",
@@ -24,7 +26,8 @@
     "species": "黃錫鯛",
     "tags": ["磯釣", "路亞"],
     "line": "尾鰭一金，秤完才說話。",
-    "image": "/media/fb/post_gallery_3_590.jpg"
+    "image": "/media/fb/post_gallery_3_590.jpg",
+    "spotId": "budai-reef"
   },
   {
     "id": "armed",
@@ -33,6 +36,7 @@
     "species": "全副武裝",
     "tags": ["磯釣"],
     "line": "背心、遮陽、竿夾腋下——上磯。",
-    "image": "/media/fb/post_older_4_590.jpg"
+    "image": "/media/fb/post_older_4_590.jpg",
+    "spotId": "lukang-depart"
   }
 ]

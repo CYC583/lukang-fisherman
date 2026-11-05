@@ -6,8 +6,9 @@ import { sfx } from "@/lib/sfx";
 import { useSoundOptional } from "./SoundContext";
 
 /**
- * Magazine title page (扉頁) — paper-white + mist-gold over living sea.
- * No finger/gyro parallax. No icon row. No heavy card shadow.
+ * Magazine title page — paper-white + mist-gold.
+ * First actions: large Facebook + Pixnet. Story/map CTAs secondary.
+ * No finger/gyro parallax. No icon row.
  */
 export function HeroCover() {
   const site = getSite();
@@ -51,7 +52,6 @@ export function HeroCover() {
           preload="metadata"
           className="absolute inset-0 h-full w-full scale-[1.04] object-cover opacity-[0.48]"
         />
-        {/* soft mist veil — light, not muddy */}
         <div
           className="absolute inset-0"
           style={{
@@ -69,16 +69,15 @@ export function HeroCover() {
         />
       </div>
 
-      {/* Magazine plate — thin gold frame, paper field, precise margins */}
       <div
-        className="relative z-10 mx-auto flex w-[min(92vw,22.5rem)] flex-col items-center px-8 py-10 text-center"
+        className="relative z-10 mx-auto flex w-[min(92vw,22.5rem)] flex-col items-center px-7 py-9 text-center"
         style={{
           background: "rgba(247,244,237,0.92)",
           border: "1px solid rgba(197,160,89,0.55)",
           boxShadow: "0 1px 0 rgba(255,255,255,0.35) inset",
         }}
       >
-        <p className="mag-label mb-7">{site.eyebrow}</p>
+        <p className="mag-label mb-6">{site.eyebrow}</p>
 
         <h1
           className="mag-title leading-none text-[var(--color-charcoal)]"
@@ -87,13 +86,13 @@ export function HeroCover() {
           {site.title}
         </h1>
 
-        <div className="mag-rule my-6" aria-hidden />
+        <div className="mag-rule my-5" aria-hidden />
 
         <p
-          className="mb-9 font-semibold leading-[1.55] text-[var(--color-charcoal)]"
+          className="mb-7 font-semibold leading-[1.55] text-[var(--color-charcoal)]"
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(1.375rem, 6.2vw, 1.625rem)",
+            fontSize: "clamp(1.25rem, 5.8vw, 1.5rem)",
             letterSpacing: "0.08em",
             maxWidth: "16em",
           }}
@@ -101,44 +100,81 @@ export function HeroCover() {
           {site.tagline}
         </p>
 
+        {/* Big destination CTAs — FB + Pixnet first */}
         <div className="flex w-full flex-col gap-2.5">
           <a
-            href="#logbook"
+            href={site.facebookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={tap}
+            data-testid="cta-facebook"
             className="flex w-full items-center justify-center font-bold transition active:opacity-90"
             style={{
-              minHeight: 52,
+              minHeight: 56,
               background: "var(--color-gold)",
               color: "var(--color-indigo)",
-              fontSize: "0.9375rem",
-              letterSpacing: "0.28em",
+              fontSize: "1rem",
+              letterSpacing: "0.22em",
               fontFamily: "var(--font-display)",
             }}
           >
             {site.primaryCta}
           </a>
           <a
-            href={site.facebookUrl}
+            href={site.pixnetUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={tap}
-            className="flex w-full items-center justify-center transition active:opacity-90"
+            data-testid="cta-pixnet"
+            className="flex w-full items-center justify-center font-bold transition active:opacity-90"
             style={{
-              minHeight: 48,
-              border: "1px solid rgba(197,160,89,0.75)",
-              color: "var(--color-charcoal)",
-              background: "transparent",
-              fontSize: "0.875rem",
-              letterSpacing: "0.28em",
+              minHeight: 56,
+              background: "var(--color-indigo)",
+              color: "var(--color-paper)",
+              fontSize: "1rem",
+              letterSpacing: "0.22em",
               fontFamily: "var(--font-display)",
             }}
           >
             {site.secondaryCta}
           </a>
         </div>
+
+        {/* Quiet secondary — map + story, not dates */}
+        <div className="mt-5 flex w-full flex-col gap-2">
+          <a
+            href="#map"
+            onClick={tap}
+            className="flex w-full items-center justify-center transition active:opacity-90"
+            style={{
+              minHeight: 44,
+              border: "1px solid rgba(197,160,89,0.75)",
+              color: "var(--color-charcoal)",
+              background: "transparent",
+              fontSize: "0.8125rem",
+              letterSpacing: "0.28em",
+              fontFamily: "var(--font-display)",
+            }}
+          >
+            {site.mapCta}
+          </a>
+          <a
+            href="#logbook"
+            onClick={tap}
+            className="flex w-full items-center justify-center transition active:opacity-90"
+            style={{
+              minHeight: 40,
+              color: "rgba(26,26,26,0.55)",
+              fontSize: "0.75rem",
+              letterSpacing: "0.28em",
+              fontFamily: "var(--font-display)",
+            }}
+          >
+            {site.storyCta}
+          </a>
+        </div>
       </div>
 
-      {/* quiet bottom breath — no icons */}
       <div className="pointer-events-none absolute bottom-7 left-0 right-0 flex justify-center" aria-hidden>
         <span
           className="block h-8 w-px"

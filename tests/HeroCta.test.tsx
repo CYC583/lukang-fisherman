@@ -7,11 +7,12 @@ import { SoundProvider } from "@/components/SoundContext";
 afterEach(cleanup);
 
 describe("HeroCta", () => {
-  it("primary story anchor and FB secondary only", () => {
+  it("large Facebook and Pixnet CTAs", () => {
     render(<HeroCta />);
-    expect(screen.getByRole("link", { name: "看漁人故事" })).toHaveAttribute("href", "#logbook");
-    const fb = screen.getByRole("link", { name: "看更多出海日常" });
+    const fb = screen.getByRole("link", { name: "Facebook 粉專" });
     expect(fb).toHaveAttribute("href", expect.stringContaining("facebook.com"));
+    const pix = screen.getByRole("link", { name: "痞客邦部落格" });
+    expect(pix).toHaveAttribute("href", expect.stringContaining("pixnet.net"));
   });
 });
 
@@ -21,7 +22,7 @@ describe("HeroCover", () => {
     window.HTMLMediaElement.prototype.pause = vi.fn();
   });
 
-  it("paper magazine plate with dual CTAs and soft loop (no triple nav)", () => {
+  it("paper plate with big FB + Pixnet first (no date dump)", () => {
     const { container } = render(
       <SoundProvider>
         <HeroCover />
@@ -29,11 +30,15 @@ describe("HeroCover", () => {
     );
     expect(screen.getByRole("heading", { name: "鹿港漁人" })).toBeTruthy();
     expect(screen.getByText("磯上十幾年。潮汐不等人。")).toBeTruthy();
-    expect(screen.getByRole("link", { name: "看漁人故事" })).toHaveAttribute("href", "#logbook");
-    expect(screen.getByRole("link", { name: "看更多出海日常" })).toHaveAttribute(
+    expect(screen.getByTestId("cta-facebook")).toHaveAttribute(
       "href",
       expect.stringContaining("facebook.com"),
     );
+    expect(screen.getByTestId("cta-pixnet")).toHaveAttribute(
+      "href",
+      expect.stringContaining("pixnet.net"),
+    );
+    expect(screen.getByRole("link", { name: "打開釣點地圖" })).toHaveAttribute("href", "#map");
     expect(screen.queryByText("磯釣系列")).toBeNull();
     expect(screen.queryByText("釣友會想傳的幾張")).toBeNull();
     expect(container.querySelector('video[src="/media/cover-loop.mp4"]')).toBeTruthy();

@@ -40,12 +40,15 @@ describe("SeaLogbook", () => {
 });
 
 describe("MemoryPostcards", () => {
-  it("shows Japanese editorial plates and FB CTA only", () => {
+  it("shows Japanese editorial plates with FB + Pixnet", () => {
     render(<MemoryPostcards />);
     expect(screen.queryByText("釣友會想傳的幾張")).toBeNull();
     expect(screen.getByText("磯の記録")).toBeTruthy();
-    const cta = screen.getByRole("link", { name: "看更多出海日常" });
-    expect(cta).toHaveAttribute("href", expect.stringContaining("facebook.com"));
+    expect(screen.getByText("西岸一線")).toBeTruthy();
+    const fb = screen.getByRole("link", { name: "Facebook 粉專" });
+    expect(fb).toHaveAttribute("href", expect.stringContaining("facebook.com"));
+    const pix = screen.getByRole("link", { name: "痞客邦部落格" });
+    expect(pix).toHaveAttribute("href", expect.stringContaining("pixnet.net"));
   });
 });
 

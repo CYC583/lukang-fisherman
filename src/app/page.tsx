@@ -2,6 +2,7 @@ import { SoundProvider } from "@/components/SoundContext";
 import { SoundGate } from "@/components/SoundGate";
 import { IntroGate } from "@/components/IntroOverlay";
 import { HeroCover } from "@/components/HeroCover";
+import { FishingMap } from "@/components/FishingMap";
 import { SeaLogbook } from "@/components/SeaLogbook";
 import { MemoryPostcards } from "@/components/MemoryPostcards";
 import { AmbientAudio } from "@/components/AmbientAudio";
@@ -14,6 +15,7 @@ export default function Home() {
         <SoundGate />
         <IntroGate />
         <HeroCover />
+        <FishingMap />
         <SeaLogbook />
         <MemoryPostcards />
         <SiteFooter />

@@ -71,3 +71,48 @@ body {
   font-weight: 700;
   letter-spacing: var(--track-display);
 }
+
+/* Fishing map — mist-gold pins on paper tiles */
+.lf-map.leaflet-container {
+  background: #f7f4ed;
+  font-family: var(--font-body);
+  width: 100%;
+  height: 100% !important;
+  min-height: 320px;
+  z-index: 0;
+}
+.lf-map {
+  position: relative;
+  z-index: 0;
+}
+.lf-pin {
+  background: transparent !important;
+  border: none !important;
+}
+.lf-pin-dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin: 4px;
+  border-radius: 999px;
+  background: #c5a059;
+  border: 2px solid #0b1c2c;
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.28);
+}
+.leaflet-control-zoom a {
+  background: #f7f4ed !important;
+  color: #0b1c2c !important;
+  border-color: rgba(197, 160, 89, 0.55) !important;
+  width: 32px !important;
+  height: 32px !important;
+  line-height: 30px !important;
+  font-size: 16px !important;
+}
+.leaflet-control-attribution {
+  background: rgba(247, 244, 237, 0.85) !important;
+  color: rgba(11, 28, 44, 0.45) !important;
+  font-size: 9px !important;
+}
+.leaflet-control-attribution a {
+  color: rgba(11, 28, 44, 0.55) !important;
+}

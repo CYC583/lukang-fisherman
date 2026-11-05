@@ -1,26 +1,26 @@
 [
   {
-    "id": "rod-at-eddy",
-    "badge": "釣點",
-    "title": "他的角",
-    "blurb": "卵石堤迴流——懂的人會點頭。",
-    "image": "/media/fb/post_gallery_1_590.jpg",
+    "id": "coast-dawn",
+    "badge": "海岸",
+    "title": "西岸一線",
+    "blurb": "潮退之後，礁還在等他。",
+    "image": "/media/fb/profile_cover_960.jpg",
     "credit": "公開釣行"
   },
   {
-    "id": "black-porgy",
-    "badge": "釣果",
-    "title": "剛上岸",
-    "blurb": "線還在嘴邊。這就是他。",
-    "image": "/media/fb/post_gallery_2_590.jpg",
-    "credit": "公開釣行"
-  },
-  {
-    "id": "master-catch",
+    "id": "rod-silhouette",
     "badge": "人物",
-    "title": "鹿港漁人",
-    "blurb": "磯上十幾年。全副武裝。",
-    "image": "/media/fb/post_older_4_590.jpg",
+    "title": "白帽磯影",
+    "blurb": "全副武裝。風一吹，竿尖說話。",
+    "image": "/media/fb/refs/ref_01.jpg",
+    "credit": "公開釣行"
+  },
+  {
+    "id": "line-in-water",
+    "badge": "釣行",
+    "title": "線入水紋",
+    "blurb": "拋出去的不是餌，是耐心。",
+    "image": "/media/fb/refs/ref_02.jpg",
     "credit": "公開釣行"
   }
 ]
