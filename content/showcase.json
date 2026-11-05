@@ -5,9 +5,21 @@
   "pageUrl": "https://www.facebook.com/people/鹿港漁人/100063821466190/",
   "snapshotNote": "互動數取自粉專公開頁 2026-11-06 快照",
   "categories": [
-    { "key": "catch", "label": "實釣", "en": "CATCH" },
-    { "key": "island", "label": "離島", "en": "ISLAND" },
-    { "key": "reel", "label": "現場 Reel", "en": "REEL" }
+    {
+      "key": "catch",
+      "label": "實釣",
+      "en": "CATCH"
+    },
+    {
+      "key": "island",
+      "label": "離島",
+      "en": "ISLAND"
+    },
+    {
+      "key": "reel",
+      "label": "現場 Reel",
+      "en": "REEL"
+    }
   ],
   "items": [
     {
@@ -19,8 +31,21 @@
       "title": "澎湖離島 · 火山岩與藍海",
       "kicker": "ISLAND RUN",
       "body": "玄武岩礁、深藍外海、一整組人與裝備上島——粉專最有畫面的一次離島釣行。",
-      "stats": [{ "label": "讚", "value": "418" }, { "label": "圖", "value": "+8" }],
-      "tags": ["澎湖", "離島", "團隊釣行"],
+      "stats": [
+        {
+          "label": "讚",
+          "value": "418"
+        },
+        {
+          "label": "圖",
+          "value": "+8"
+        }
+      ],
+      "tags": [
+        "澎湖",
+        "離島",
+        "團隊釣行"
+      ],
       "image": "/media/fb/profile_cover_960.jpg",
       "imagePosition": "center 55%",
       "imageNote": "暫用粉專封面同系火山岩海景；原貼 8 張圖待下載後替換",
@@ -36,12 +61,25 @@
       "title": "一小時兩尾 · 十幾斤",
       "kicker": "PERSONAL RECORD",
       "body": "10 幾斤的體型，1 號竿配 2.5# 母線游刃有餘。一小時內起兩隻——這紀錄這輩子應該很難超越了。",
-      "stats": [{ "label": "觀看", "value": "9,999" }, { "label": "心情", "value": "271" }],
-      "tags": ["阿天達lll 1-53", "2.5# 母線"],
+      "stats": [
+        {
+          "label": "觀看",
+          "value": "9,999"
+        },
+        {
+          "label": "心情",
+          "value": "271"
+        }
+      ],
+      "tags": [
+        "阿天達lll 1-53",
+        "2.5# 母線"
+      ],
       "image": "/media/fb/showcase/reel_1262430052533267_wide.jpg",
       "imagePosition": "6% 50%",
       "postUrl": "https://www.facebook.com/reel/1262430052533267",
-      "linkLabel": "看 Reel"
+      "linkLabel": "看 Reel",
+      "video": "/media/fb/showcase/reel_1262430052533267.mp4"
     },
     {
       "id": "post-2026-10-20-haomei",
@@ -51,8 +89,18 @@
       "title": "好美漁港 · 三斤級黑鯛",
       "kicker": "LONG READ",
       "body": "好美外凸堤極淺場：炒浪粽腳與潮目帶起斤級到三斤級黑鯛，遠拋再遇花身群。gama 競技三／shimano 鱗海上場。",
-      "stats": [{ "label": "魚種", "value": "黑鯛 · 花身" }],
-      "tags": ["嘉義布袋", "淺場", "gama 競技三", "shimano 鱗海"],
+      "stats": [
+        {
+          "label": "魚種",
+          "value": "黑鯛 · 花身"
+        }
+      ],
+      "tags": [
+        "嘉義布袋",
+        "淺場",
+        "gama 競技三",
+        "shimano 鱗海"
+      ],
       "note": "文內提及澎湖賽事取消（註記，非比賽紀錄）",
       "image": "/media/fb/post_gallery_1_590.jpg",
       "imagePosition": "center 45%",
@@ -71,8 +119,20 @@
       "title": "2.5 小時 · 兩匹 40up 黑牛",
       "kicker": "ACHIEVEMENT",
       "body": "午後兩點餘到本島淺場，水深約兩尺、反撥潮外推，2.5 小時實釣收兩匹 40up 黑牛。",
-      "stats": [{ "label": "尾", "value": "2 × 40up" }, { "label": "時", "value": "2.5h" }],
-      "tags": ["#零釣會", "#阿天達lll"],
+      "stats": [
+        {
+          "label": "尾",
+          "value": "2 × 40up"
+        },
+        {
+          "label": "時",
+          "value": "2.5h"
+        }
+      ],
+      "tags": [
+        "#零釣會",
+        "#阿天達lll"
+      ],
       "image": "/media/fb/catch_pride_hand.jpg",
       "imagePosition": "center 40%",
       "imageNote": "本機粉專漁獲圖；原文圖待下載後替換",
@@ -88,12 +148,26 @@
       "title": "休閒場小釣 · 找回手感",
       "kicker": "MOST VIEWED",
       "body": "休閒場小釣，慢慢找回手感。",
-      "stats": [{ "label": "觀看", "value": "2.1萬" }, { "label": "心情", "value": "470" }],
-      "tags": ["#gama競技0-50", "#小胡迷你籤", "#志成白几奴"],
+      "stats": [
+        {
+          "label": "觀看",
+          "value": "2.1萬"
+        },
+        {
+          "label": "心情",
+          "value": "470"
+        }
+      ],
+      "tags": [
+        "#gama競技0-50",
+        "#小胡迷你籤",
+        "#志成白几奴"
+      ],
       "image": "/media/fb/showcase/reel_2473239573205430.jpg",
       "imagePosition": "center 45%",
       "postUrl": "https://www.facebook.com/reel/2473239573205430",
-      "linkLabel": "看 Reel"
+      "linkLabel": "看 Reel",
+      "video": "/media/fb/showcase/reel_2473239573205430.mp4"
     },
     {
       "id": "post-2026-01-19-hardshell",
@@ -103,8 +177,16 @@
       "title": "厚殼難關",
       "kicker": "ROUGH WATER",
       "body": "浪大風強的惡劣條件下硬上礁實釣——粉專互動最高的一篇。",
-      "stats": [{ "label": "讚", "value": "492" }],
-      "tags": ["惡劣海況", "磯釣"],
+      "stats": [
+        {
+          "label": "讚",
+          "value": "492"
+        }
+      ],
+      "tags": [
+        "惡劣海況",
+        "磯釣"
+      ],
       "image": "/media/fb/coast_wave.jpg",
       "imagePosition": "center 50%",
       "imageNote": "暫用本機粉專浪擊礁圖；原文圖待下載後替換",
@@ -119,12 +201,24 @@
       "title": "滿海燕魚 · 誘到浮起來吃",
       "kicker": "ON THE ROCK",
       "body": "出發前在船上聽釣友說滿海的燕魚——果然不假，誘到都浮起來吃。",
-      "stats": [{ "label": "觀看", "value": "8,675" }, { "label": "心情", "value": "221" }],
-      "tags": ["#牛奶糖練餌"],
+      "stats": [
+        {
+          "label": "觀看",
+          "value": "8,675"
+        },
+        {
+          "label": "心情",
+          "value": "221"
+        }
+      ],
+      "tags": [
+        "#牛奶糖練餌"
+      ],
       "image": "/media/fb/showcase/reel_4281959865450672.jpg",
       "imagePosition": "center 40%",
       "postUrl": "https://www.facebook.com/reel/4281959865450672",
-      "linkLabel": "看 Reel"
+      "linkLabel": "看 Reel",
+      "video": "/media/fb/showcase/reel_4281959865450672.mp4"
     },
     {
       "id": "reel-1316179553781396",
@@ -134,12 +228,24 @@
       "title": "堤上現場 · 上手一尾",
       "kicker": "REEL",
       "body": "鹿港漁人 Reels：堤邊收魚的當下。",
-      "stats": [{ "label": "觀看", "value": "5,305" }, { "label": "心情", "value": "171" }],
-      "tags": ["現場"],
+      "stats": [
+        {
+          "label": "觀看",
+          "value": "5,305"
+        },
+        {
+          "label": "心情",
+          "value": "171"
+        }
+      ],
+      "tags": [
+        "現場"
+      ],
       "image": "/media/fb/showcase/reel_1316179553781396.jpg",
       "imagePosition": "center 35%",
       "postUrl": "https://www.facebook.com/reel/1316179553781396",
-      "linkLabel": "看 Reel"
+      "linkLabel": "看 Reel",
+      "video": "/media/fb/showcase/reel_1316179553781396.mp4"
     },
     {
       "id": "reel-1489854039217844",
@@ -149,12 +255,25 @@
       "title": "阿肥師傅帶我飛",
       "kicker": "CREW",
       "body": "阿肥師傅帶我飛——冰箱準備好囉。",
-      "stats": [{ "label": "觀看", "value": "2,655" }, { "label": "心情", "value": "85" }],
-      "tags": ["出船", "釣友"],
+      "stats": [
+        {
+          "label": "觀看",
+          "value": "2,655"
+        },
+        {
+          "label": "心情",
+          "value": "85"
+        }
+      ],
+      "tags": [
+        "出船",
+        "釣友"
+      ],
       "image": "/media/fb/showcase/reel_1489854039217844.jpg",
       "imagePosition": "center 50%",
       "postUrl": "https://www.facebook.com/reel/1489854039217844",
-      "linkLabel": "看 Reel"
+      "linkLabel": "看 Reel",
+      "video": "/media/fb/showcase/reel_1489854039217844.mp4"
     }
   ]
 }

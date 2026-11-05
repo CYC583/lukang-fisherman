@@ -26,6 +26,10 @@ describe("showcase.json", () => {
       expect(it.postUrl).toMatch(/^https:\/\/www\.facebook\.com\//);
       expect(it.image.startsWith("/media/")).toBe(true);
       expect(() => readFileSync(join(process.cwd(), "public", it.image))).not.toThrow();
+      if (it.kind === "reel") {
+        expect(it.video).toMatch(/^\/media\/fb\/showcase\/reel_\d+\.mp4$/);
+        expect(() => readFileSync(join(process.cwd(), "public", it.video!))).not.toThrow();
+      }
       if (it.spotId) expect(spotIds.has(it.spotId)).toBe(true);
       expect(it.title).not.toMatch(/比賽|賽事/);
     }
@@ -62,5 +66,41 @@ describe("FbShowcase", () => {
     fireEvent.click(within(rail).getByRole("button", { name: reels[reels.length - 1].title }));
     expect(within(stage).getByRole("heading", { level: 3 }).textContent).toBe(reels[reels.length - 1].title);
     window.removeEventListener(FLY_EVENT, fly as EventListener);
+  });
+
+  it("reel stage exposes play control + video; play reveals player", () => {
+    wrap();
+    fireEvent.click(screen.getByRole("tab", { name: /現場 Reel/ }));
+    const stage = screen.getByTestId("showcase-stage");
+    expect(stage.getAttribute("data-kind")).toBe("reel");
+
+    const video = screen.getByTestId("showcase-video") as HTMLVideoElement;
+    expect(video.tagName).toBe("VIDEO");
+    expect(video.getAttribute("playsinline")).not.toBeNull();
+    const src = video.getAttribute("src") || video.src;
+    expect(src).toMatch(/\/media\/fb\/showcase\/reel_\d+\.mp4/);
+    const poster = video.getAttribute("poster") || "";
+    expect(poster).toMatch(/\/media\/fb\/showcase\//);
+
+    const play = screen.getByTestId("showcase-play");
+    expect(play.tagName).toBe("BUTTON");
+    expect(play).toHaveAttribute("aria-label", "播放 Reel");
+
+    // mock play/pause since jsdom HTMLMediaElement is stubby
+    video.play = vi.fn().mockResolvedValue(undefined);
+    video.pause = vi.fn();
+
+    fireEvent.click(play);
+    expect(video.play).toHaveBeenCalled();
+    // onPlay handler may not fire from mocked play — simulate it
+    fireEvent.play(video);
+    expect(stage.getAttribute("data-playing")).toBe("1");
+    expect(screen.queryByTestId("showcase-play")).toBeNull();
+    expect(video.controls).toBe(true);
+
+    // switching cards pauses
+    fireEvent.click(screen.getByRole("button", { name: "下一則" }));
+    expect(screen.getByTestId("showcase-stage").getAttribute("data-playing")).toBe("0");
+    expect(screen.getByTestId("showcase-play")).toBeTruthy();
   });
 });

@@ -16,6 +16,8 @@ export type ShowcaseItem = {
   tags: string[];
   note?: string;
   image: string;
+  /** Local mp4 for in-page Reel playback */
+  video?: string;
   imagePosition?: string;
   imageNote?: string;
   postUrl: string;

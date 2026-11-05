@@ -50,6 +50,7 @@ export function FbShowcase() {
   const railRef = useRef<HTMLUListElement>(null);
   const chipRowRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const swipe = useRef<{ x: number; y: number; id: number } | null>(null);
   const [inView, setInView] = useState(false);
   const [filter, setFilter] = useState<Filter>("all");
@@ -57,8 +58,13 @@ export function FbShowcase() {
   const [selId, setSelId] = useState(items[0]?.id ?? "");
   const [dir, setDir] = useState<1 | -1>(1);
   const [rule, setRule] = useState<{ x: number; w: number }>({ x: 0, w: 0 });
+  const [playing, setPlaying] = useState(false);
+  const [useEmbed, setUseEmbed] = useState(false);
   const sel: ShowcaseItem | undefined = list.find((i) => i.id === selId) ?? list[0];
   const idx = sel ? list.indexOf(sel) : 0;
+  const embedUrl = sel?.kind === "reel"
+    ? `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(sel.postUrl)}&show_text=false&width=390`
+    : undefined;
 
   const tap = useCallback(() => {
     if (soundOn === true) sfx.tap();
@@ -100,6 +106,50 @@ export function FbShowcase() {
     const left = card.offsetLeft - rail.clientWidth / 2 + card.offsetWidth / 2;
     rail.scrollTo({ left, behavior: prefersReducedMotion() ? "auto" : "smooth" });
   }, [sel]);
+
+  /* pause previous reel when switching cards */
+  useEffect(() => {
+    const v = videoRef.current;
+    if (v) {
+      v.pause();
+      try {
+        v.currentTime = 0;
+      } catch {
+        /* ignore seek on empty src */
+      }
+    }
+    setPlaying(false);
+    setUseEmbed(false);
+  }, [sel?.id]);
+
+  const togglePlay = useCallback(
+    (e?: { stopPropagation?: () => void; preventDefault?: () => void }) => {
+      e?.stopPropagation?.();
+      e?.preventDefault?.();
+      if (!sel || sel.kind !== "reel") return;
+      tap();
+      if (useEmbed) return;
+      const v = videoRef.current;
+      if (!v || !sel.video) {
+        setUseEmbed(true);
+        return;
+      }
+      if (v.paused) {
+        void v
+          .play()
+          .then(() => setPlaying(true))
+          .catch(() => {
+            /* autoplay policy / decode fail → FB embed */
+            setUseEmbed(true);
+            setPlaying(false);
+          });
+      } else {
+        v.pause();
+        setPlaying(false);
+      }
+    },
+    [sel, tap, useEmbed],
+  );
 
   const select = useCallback(
     (id: string) => {
@@ -158,7 +208,19 @@ export function FbShowcase() {
     if (!s || s.id !== e.pointerId) return;
     const dx = e.clientX - s.x;
     const dy = e.clientY - s.y;
-    if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy) * 1.3) step(dx < 0 ? 1 : -1);
+    if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+      step(dx < 0 ? 1 : -1);
+      return;
+    }
+    /* short tap on reel stage media → play/pause (not when hitting a link/button) */
+    if (
+      sel?.kind === "reel" &&
+      Math.abs(dx) < 12 &&
+      Math.abs(dy) < 12 &&
+      !(e.target instanceof Element && e.target.closest("a,button"))
+    ) {
+      togglePlay();
+    }
   };
 
   const seeOnGlobe = (spotId: string) => {
@@ -257,6 +319,7 @@ export function FbShowcase() {
             className="lf-show-stage"
             data-testid="showcase-stage"
             data-kind={sel.kind}
+            data-playing={playing ? "1" : "0"}
             onPointerDown={onDown}
             onPointerUp={onUp}
             onPointerMove={onMove}
@@ -269,50 +332,97 @@ export function FbShowcase() {
               aria-live="polite"
               aria-label={sel.title}
             >
-              <div className="lf-show-media">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={sel.image}
-                  alt={sel.title}
-                  draggable={false}
-                  style={{ objectPosition: sel.imagePosition ?? "center" } as CSSProperties}
-                />
+              <div
+                className="lf-show-media"
+                data-playing={playing ? "1" : "0"}
+                data-embed={useEmbed ? "1" : "0"}
+              >
+                {sel.kind === "reel" && useEmbed && embedUrl ? (
+                  <iframe
+                    title={sel.title}
+                    src={embedUrl}
+                    className="lf-show-embed"
+                    data-testid="showcase-embed"
+                    allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                    allowFullScreen
+                    loading="lazy"
+                  />
+                ) : sel.kind === "reel" && sel.video ? (
+                  <video
+                    key={sel.id}
+                    ref={videoRef}
+                    className="lf-show-video"
+                    data-testid="showcase-video"
+                    src={sel.video}
+                    poster={sel.image}
+                    playsInline
+                    preload="metadata"
+                    controls={playing}
+                    controlsList="nodownload"
+                    onPlay={() => setPlaying(true)}
+                    onPause={() => setPlaying(false)}
+                    onEnded={() => setPlaying(false)}
+                    onError={() => {
+                      setUseEmbed(true);
+                      setPlaying(false);
+                    }}
+                  />
+                ) : (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={sel.image}
+                    alt={sel.title}
+                    draggable={false}
+                    style={{ objectPosition: sel.imagePosition ?? "center" } as CSSProperties}
+                  />
+                )}
                 <span className="lf-show-glare" aria-hidden />
                 <span className="lf-show-shade" aria-hidden />
-                {sel.kind === "reel" && (
-                  <span className="lf-show-play" aria-hidden>
-                    <svg viewBox="0 0 24 24" width="22" height="22">
+                {sel.kind === "reel" && !useEmbed && !playing && (
+                  <button
+                    type="button"
+                    className="lf-press lf-show-play"
+                    data-testid="showcase-play"
+                    aria-label="播放 Reel"
+                    onClick={(e) => togglePlay(e)}
+                    onPointerDown={(e) => e.stopPropagation()}
+                  >
+                    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden>
                       <path d="M8 5.5v13l10.5-6.5z" fill="currentColor" />
                     </svg>
-                  </span>
+                  </button>
                 )}
                 <span className="lf-show-corner tl" aria-hidden />
                 <span className="lf-show-corner tr" aria-hidden />
                 <span className="lf-show-corner bl" aria-hidden />
                 <span className="lf-show-corner br" aria-hidden />
-                <div className="lf-show-top">
-                  <span className="lf-show-badge">{sel.kicker}</span>
-                  <span className="lf-show-count">
-                    {pad(idx + 1)} <i>/</i> {pad(list.length)}
-                  </span>
-                </div>
-                <div className="lf-show-caption">
-                  <p className="lf-show-meta">
-                    {categories.find((c) => c.key === sel.category)?.label}
-                    {sel.date ? <> · {sel.date.replaceAll("-", ".")}</> : null}
-                  </p>
-                  <h3 className="lf-show-title">{sel.title}</h3>
-                  {sel.stats.length > 0 && (
-                    <div className="lf-show-stats">
-                      {sel.stats.map((s) => (
-                        <span key={s.label}>
-                          <b>{s.value}</b>
-                          {s.label}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                {!playing && (
+                  <div className="lf-show-top">
+                    <span className="lf-show-badge">{sel.kicker}</span>
+                    <span className="lf-show-count">
+                      {pad(idx + 1)} <i>/</i> {pad(list.length)}
+                    </span>
+                  </div>
+                )}
+                {!playing && (
+                  <div className="lf-show-caption">
+                    <p className="lf-show-meta">
+                      {categories.find((c) => c.key === sel.category)?.label}
+                      {sel.date ? <> · {sel.date.replaceAll("-", ".")}</> : null}
+                    </p>
+                    <h3 className="lf-show-title">{sel.title}</h3>
+                    {sel.stats.length > 0 && (
+                      <div className="lf-show-stats">
+                        {sel.stats.map((s) => (
+                          <span key={s.label}>
+                            <b>{s.value}</b>
+                            {s.label}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
               <div className="lf-show-body">
                 <p className="lf-show-text">{sel.body}</p>
