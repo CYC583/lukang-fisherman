@@ -15,7 +15,7 @@ describe("StorySection", () => {
     const { container } = render(<StorySection />);
     expect(container.querySelector("#story")).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "略過拋竿" }));
-    expect(screen.getByText(/上鉤/)).toBeTruthy();
+    expect(screen.getByText("師傅幫你甩了——上鉤！")).toBeTruthy();
   });
   it("renders video media", () => {
     const { container } = render(<StorySection />);
