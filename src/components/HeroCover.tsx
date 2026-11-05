@@ -66,19 +66,19 @@ export function HeroCover() {
       >
         <p
           className="mb-4 font-semibold tracking-[0.28em]"
-          style={{ color: "#C5A059", fontSize: "clamp(1.05rem, 4.2vw, 1.25rem)" }}
+          style={{ color: "#C5A059", fontSize: "clamp(1rem, 4vw, 1.125rem)" }}
         >
           {site.eyebrow}
         </p>
 
         <h1
           className="font-bold leading-none tracking-[0.2em]"
-          style={{ color: "#1a1a1a", fontSize: "clamp(2.15rem, 9.5vw, 2.6rem)" }}
+          style={{ color: "#1a1a1a", fontSize: "clamp(2.25rem, 10vw, 2.75rem)" }}
         >
           {site.title}
         </h1>
 
-        <p className="mt-3 tracking-[0.35em]" style={{ color: "#333", fontSize: "clamp(0.8rem, 3.2vw, 0.95rem)" }}>
+        <p className="mt-3 tracking-[0.22em]" style={{ color: "#333", fontSize: "clamp(1rem, 4vw, 1.125rem)" }}>
           {site.subtitle}
         </p>
 
@@ -86,8 +86,8 @@ export function HeroCover() {
 
         {/* One attitude line — not lyric */}
         <p
-          className="mb-7 font-medium leading-relaxed tracking-[0.08em]"
-          style={{ color: "#1a1a1a", fontSize: "clamp(1.45rem, 6.8vw, 1.85rem)" }}
+          className="mb-7 font-semibold leading-relaxed tracking-[0.04em]"
+          style={{ color: "#1a1a1a", fontSize: "clamp(1.5rem, 7vw, 1.75rem)" }}
         >
           {site.tagline}
         </p>

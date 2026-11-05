@@ -28,7 +28,7 @@ export function SoundGate() {
         >
           {site.title}
         </p>
-        <p className="text-[10px] tracking-[0.45em] text-[var(--color-paper)]/60">{site.subtitle}</p>
+        <p className="text-[14px] tracking-[0.28em] text-[var(--color-paper)]/75">{site.subtitle}</p>
       </div>
 
       <button

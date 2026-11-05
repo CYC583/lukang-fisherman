@@ -52,7 +52,7 @@ export function IntroOverlay({ onDone }: { onDone: () => void }) {
       />
       {showLine && (
         <div className="pointer-events-none absolute inset-x-0 bottom-20 flex justify-center px-8">
-          <p className="text-center text-[12px] tracking-[0.35em] text-[#C5A059] drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+          <p className="text-center text-[20px] font-semibold tracking-[0.08em] text-[#F4F1EA] drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
             磯上十年。海不等人。
           </p>
         </div>
