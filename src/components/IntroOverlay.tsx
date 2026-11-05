@@ -6,11 +6,10 @@ import { useSound } from "./SoundContext";
 
 const OPENER_SRC = "/media/opener-montage.mp4";
 
-/** Hard-cut film trailer. No PPT captions. Audio only after sound gate. */
+/** Hard-cut film trailer. No mid-film captions — cover owns the attitude line. */
 export function IntroOverlay({ onDone }: { onDone: () => void }) {
   const { soundOn, markIntroDone } = useSound();
   const [leaving, setLeaving] = useState(false);
-  const [showLine, setShowLine] = useState(false);
   const done = useRef(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -29,9 +28,6 @@ export function IntroOverlay({ onDone }: { onDone: () => void }) {
     v.volume = soundOn === true ? 1 : 0;
     const p = v.play();
     if (p && typeof p.catch === "function") p.catch(() => {});
-    // Attitude line only after climax (~13.6s) — never in first 5s
-    const lineTimer = window.setTimeout(() => setShowLine(true), 14000);
-    return () => window.clearTimeout(lineTimer);
   }, [soundOn]);
 
   return (
@@ -50,13 +46,6 @@ export function IntroOverlay({ onDone }: { onDone: () => void }) {
         onEnded={finish}
         className="absolute inset-0 h-full w-full object-cover"
       />
-      {showLine && (
-        <div className="pointer-events-none absolute inset-x-0 bottom-20 flex justify-center px-8">
-          <p className="text-center text-[20px] font-semibold tracking-[0.08em] text-[#F4F1EA] drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
-            磯上十年。海不等人。
-          </p>
-        </div>
-      )}
     </div>
   );
 }

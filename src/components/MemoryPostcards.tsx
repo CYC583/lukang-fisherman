@@ -5,7 +5,7 @@ import { getMemories, getSite } from "@/lib/content";
 import { sfx } from "@/lib/sfx";
 import { useSoundOptional } from "./SoundContext";
 
-/** Respect / envy memorial cards — tap to expand shareable still. Not a love wall. */
+/** Respect memorial cards — expand on tap; save image when open. Not a love wall. */
 export function MemoryPostcards() {
   const memories = getMemories();
   const site = getSite();
@@ -23,7 +23,7 @@ export function MemoryPostcards() {
         </p>
         <h2 className="text-2xl font-bold tracking-[0.25em]">釣友會想傳的幾張</h2>
         <p className="mt-3 text-sm leading-relaxed text-[var(--color-paper)]/65">
-          公開釣行。點開可全螢幕看。
+          公開釣行。點開可全螢幕看、另存圖片。
         </p>
       </div>
 
@@ -31,38 +31,56 @@ export function MemoryPostcards() {
         {memories.map((m) => {
           const expanded = open === m.id;
           return (
-            <button
+            <div
               key={m.id}
-              type="button"
-              onClick={() => {
-                tap();
-                setOpen(expanded ? null : m.id);
-              }}
-              className="overflow-hidden rounded-2xl border text-left transition"
+              className="overflow-hidden rounded-2xl border text-left"
               style={{ borderColor: "rgba(197,160,89,0.4)", background: "#0f2436" }}
             >
-              <span
-                className="absolute m-3 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest"
-                style={{ background: "#C5A059", color: "#0B1C2C", position: "relative" }}
+              <button
+                type="button"
+                onClick={() => {
+                  tap();
+                  setOpen(expanded ? null : m.id);
+                }}
+                className="block w-full text-left"
               >
-                {m.badge}
-              </span>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={m.image}
-                alt={m.title}
-                className="w-full object-cover"
-                style={{ aspectRatio: expanded ? "9 / 16" : "4 / 5", maxHeight: expanded ? 640 : undefined }}
-                loading="lazy"
-              />
-              <div className="space-y-1.5 px-4 py-4">
-                <h3 className="text-lg font-bold tracking-[0.18em]">{m.title}</h3>
-                <p className="text-sm leading-relaxed text-[var(--color-paper)]/70">{m.blurb}</p>
-                <p className="text-[10px] tracking-widest text-[var(--color-paper)]/35">
-                  {expanded ? "點一下收合" : "點開全螢幕"} · {m.credit}
-                </p>
-              </div>
-            </button>
+                <span
+                  className="m-3 inline-block rounded-full px-3 py-1 text-[10px] font-bold tracking-widest"
+                  style={{ background: "#C5A059", color: "#0B1C2C" }}
+                >
+                  {m.badge}
+                </span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={m.image}
+                  alt={m.title}
+                  className="w-full object-cover"
+                  style={{ aspectRatio: expanded ? "9 / 16" : "4 / 5", maxHeight: expanded ? 640 : undefined }}
+                  loading="lazy"
+                />
+                <div className="space-y-1.5 px-4 py-4">
+                  <h3 className="text-lg font-bold tracking-[0.18em]">{m.title}</h3>
+                  <p className="text-sm leading-relaxed text-[var(--color-paper)]/70">{m.blurb}</p>
+                  <p className="text-[12px] tracking-widest text-[var(--color-paper)]/40">
+                    {expanded ? "點一下收合" : "點開全螢幕"} · {m.credit}
+                  </p>
+                </div>
+              </button>
+              {expanded && (
+                <div className="border-t border-[var(--color-gold)]/25 px-4 py-3">
+                  <a
+                    href={m.image}
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={tap}
+                    className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-[var(--color-gold)]/70 px-5 text-sm tracking-[0.18em] text-[var(--color-gold)]"
+                  >
+                    存圖
+                  </a>
+                </div>
+              )}
+            </div>
           );
         })}
       </div>

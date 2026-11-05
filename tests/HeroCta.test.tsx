@@ -28,7 +28,7 @@ describe("HeroCover", () => {
       </SoundProvider>,
     );
     expect(screen.getByRole("heading", { name: "鹿港漁人" })).toBeTruthy();
-    expect(screen.getByText("磯上十年。海不等人。")).toBeTruthy();
+    expect(screen.getByText("磯上十幾年。海不等人。")).toBeTruthy();
     expect(screen.getByRole("link", { name: "看漁人故事" })).toHaveAttribute("href", "#logbook");
     expect(screen.getByRole("link", { name: "看更多出海日常" })).toHaveAttribute(
       "href",

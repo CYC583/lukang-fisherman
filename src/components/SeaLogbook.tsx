@@ -4,7 +4,7 @@ import { getLogbook, getSite } from "@/lib/content";
 import { sfx } from "@/lib/sfx";
 import { useSound } from "./SoundContext";
 
-/** Catch-log album — full-bleed photos, not a soft list. */
+/** Album logbook — tall photos, big gaps. No dense grid / stats / guess. */
 export function SeaLogbook() {
   const entries = getLogbook();
   const site = getSite();
@@ -21,7 +21,11 @@ export function SeaLogbook() {
 
       <ol className="mx-auto flex max-w-md flex-col" style={{ gap: 64 }}>
         {entries.map((e, i) => (
-          <li key={e.id} className="w-full">
+          <li
+            key={e.id}
+            className="w-full"
+            style={{ animation: "fadeIn 0.45s ease both", animationDelay: `${Math.min(i, 3) * 40}ms` }}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={e.image}
@@ -35,7 +39,7 @@ export function SeaLogbook() {
                 {e.date} · {e.place}
               </p>
               <p className="text-lg font-bold tracking-[0.18em] text-[var(--color-indigo)]">{e.species}</p>
-              <p className="text-[14px] leading-relaxed text-[var(--color-indigo)]/80">{e.line}</p>
+              <p className="text-[15px] leading-relaxed text-[var(--color-indigo)]/80">{e.line}</p>
             </div>
           </li>
         ))}

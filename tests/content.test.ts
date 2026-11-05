@@ -7,7 +7,7 @@ describe("content", () => {
     expect(site.title).toBe("鹿港漁人");
     expect(site.primaryCta).toBe("看漁人故事");
     expect(site.secondaryCta).toBe("看更多出海日常");
-    expect(site.tagline).toMatch(/磯上十年/);
+    expect(site.tagline).toMatch(/磯上十幾年/);
     expect(site.footerCredit).toBe("製作人：愛爸爸的女兒C");
     expect(site.facebookUrl).toContain("facebook.com");
   });

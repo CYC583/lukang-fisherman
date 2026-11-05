@@ -28,7 +28,6 @@ export function SoundGate() {
         >
           {site.title}
         </p>
-        <p className="text-[14px] tracking-[0.28em] text-[var(--color-paper)]/75">{site.subtitle}</p>
       </div>
 
       <button
@@ -49,7 +48,7 @@ export function SoundGate() {
           setSfxEnabled(false);
           choose(false);
         }}
-        className="mt-5 min-h-[44px] px-4 text-xs tracking-[0.3em] text-[var(--color-paper)]/55 underline underline-offset-4"
+        className="mt-5 min-h-[44px] px-4 text-[14px] tracking-[0.2em] text-[var(--color-paper)]/70 underline underline-offset-4"
       >
         {site.soundNo}
       </button>
