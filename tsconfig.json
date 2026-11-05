@@ -22,7 +22,7 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [
+  "include": ["vitest.setup.ts", 
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
