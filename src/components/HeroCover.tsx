@@ -66,7 +66,7 @@ export function HeroCover() {
       >
         <p
           className="mb-4 font-semibold tracking-[0.28em]"
-          style={{ color: "#C5A059", fontSize: "clamp(0.95rem, 3.8vw, 1.125rem)" }}
+          style={{ color: "#C5A059", fontSize: "clamp(1.05rem, 4.2vw, 1.25rem)" }}
         >
           {site.eyebrow}
         </p>
@@ -87,7 +87,7 @@ export function HeroCover() {
         {/* One attitude line — not lyric */}
         <p
           className="mb-7 font-medium leading-relaxed tracking-[0.08em]"
-          style={{ color: "#1a1a1a", fontSize: "clamp(1.2rem, 5.2vw, 1.45rem)" }}
+          style={{ color: "#1a1a1a", fontSize: "clamp(1.45rem, 6.8vw, 1.85rem)" }}
         >
           {site.tagline}
         </p>
@@ -101,7 +101,7 @@ export function HeroCover() {
               minHeight: 54,
               background: "#C5A059",
               color: "#0B1C2C",
-              fontSize: "0.95rem",
+              fontSize: "1.05rem",
             }}
           >
             {site.primaryCta}
@@ -117,7 +117,7 @@ export function HeroCover() {
               border: "1.5px solid rgba(197,160,89,0.85)",
               color: "#1a1a1a",
               background: "transparent",
-              fontSize: "0.875rem",
+              fontSize: "1rem",
             }}
           >
             {site.secondaryCta}
