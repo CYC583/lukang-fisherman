@@ -5,7 +5,7 @@ import { getSite } from "@/lib/content";
 import { sfx } from "@/lib/sfx";
 import { useSoundOptional } from "./SoundContext";
 
-/** Paper-white mist-gold cover. Soft loop under UI. Big dual CTAs. Native scroll only. */
+/** Cold antique-gold cover over soft-blurred sea loop. Big dual CTAs. No soft postcard vibe. */
 export function HeroCover() {
   const site = getSite();
   const { soundOn } = useSoundOptional();
@@ -22,7 +22,7 @@ export function HeroCover() {
   useEffect(() => {
     if (soundOn !== true) return;
     sfx.wave();
-    const id = window.setInterval(() => sfx.wave(), 9000);
+    const id = window.setInterval(() => sfx.wave(), 10000);
     return () => window.clearInterval(id);
   }, [soundOn]);
 
@@ -34,57 +34,72 @@ export function HeroCover() {
     <section
       id="cover"
       aria-label="封面"
-      className="relative flex min-h-dvh w-full snap-start flex-col items-center justify-center overflow-hidden"
+      className="relative flex min-h-dvh w-full snap-start flex-col items-center justify-center overflow-hidden bg-[var(--color-indigo)]"
     >
+      {/* Soft-loop base: blur 12–20px, opacity ~30% under panel */}
       <div className="absolute inset-0 overflow-hidden">
         <video
           ref={videoRef}
           src="/media/cover-loop.mp4"
           poster="/media/hero-cover.jpg"
-          aria-label="霧中海岸"
+          aria-hidden
           autoPlay
           muted
           loop
           playsInline
           preload="metadata"
-          className="absolute inset-0 h-full w-full scale-105 object-cover blur-[1.5px]"
+          className="absolute inset-0 h-full w-full scale-110 object-cover opacity-30 blur-[16px]"
         />
       </div>
+      <div className="absolute inset-0 bg-[var(--color-indigo)]/55" />
 
-      {/* Mist paper panel */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(244,241,234,0.18)_0%,rgba(11,28,44,0.55)_55%,rgba(11,28,44,0.82)_100%)]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-indigo)]/35 via-transparent to-[var(--color-indigo)]/75" />
-
-      <div className="relative z-10 flex w-full max-w-sm flex-col items-center px-6 py-16 text-center">
-        <p className="mb-5 text-[10px] tracking-[0.55em] text-[var(--color-gold)]/90">ISOFISHING · TAIWAN</p>
+      {/* Paper panel — center ~55–62vh */}
+      <div
+        className="relative z-10 mx-5 flex w-[calc(100%-40px)] max-w-[360px] flex-col items-center rounded-[18px] border px-7 py-7 text-center shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
+        style={{
+          background: "rgba(252,250,245,0.88)",
+          borderColor: "rgba(197,160,89,0.55)",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          marginTop: "8vh",
+        }}
+      >
+        <p
+          className="mb-3 text-[12px] font-medium tracking-[0.35em]"
+          style={{ color: "#C5A059" }}
+        >
+          {site.eyebrow}
+        </p>
 
         <h1
-          className="font-bold leading-none text-[var(--color-gold)]"
-          style={{
-            writingMode: "vertical-rl",
-            letterSpacing: "0.35em",
-            fontSize: "clamp(2.75rem, 12vw, 3.75rem)",
-            textShadow: "0 2px 28px rgba(11,28,44,0.6)",
-          }}
+          className="font-bold leading-none tracking-[0.2em]"
+          style={{ color: "#1a1a1a", fontSize: "clamp(1.75rem, 8vw, 2.125rem)" }}
         >
           {site.title}
         </h1>
 
-        <p className="mt-5 text-[11px] tracking-[0.45em] text-[var(--color-paper)]/85">{site.subtitle}</p>
+        <p className="mt-2 text-[11px] tracking-[0.4em]" style={{ color: "#666" }}>
+          {site.subtitle}
+        </p>
 
-        {/* Gold hairline */}
-        <div className="my-8 h-12 w-px bg-[var(--color-gold)]/85" aria-hidden />
+        <div className="my-4 h-px w-10" style={{ background: "rgba(197,160,89,0.7)" }} aria-hidden />
 
-        <p className="mb-8 max-w-[14rem] text-[12px] leading-relaxed tracking-[0.18em] text-[var(--color-paper)]/80">
+        {/* One attitude line — not lyric */}
+        <p className="mb-6 text-[14px] leading-relaxed tracking-[0.12em]" style={{ color: "#444" }}>
           {site.tagline}
         </p>
 
-        {/* Dual CTAs — primary story anchor, secondary FB only */}
         <div className="flex w-full flex-col gap-3">
           <a
             href="#logbook"
             onClick={tap}
-            className="flex min-h-[56px] w-full items-center justify-center rounded-full bg-[var(--color-gold)] px-6 text-center text-base font-bold tracking-[0.28em] text-[var(--color-indigo)] shadow-[0_10px_32px_rgba(198,167,94,0.4)] transition active:scale-[0.98]"
+            className="flex w-full items-center justify-center rounded-full font-bold tracking-[0.22em] transition active:scale-[0.98]"
+            style={{
+              minHeight: 54,
+              background: "#C5A059",
+              color: "#0B1C2C",
+              fontSize: "0.95rem",
+            }}
           >
             {site.primaryCta}
           </a>
@@ -93,12 +108,21 @@ export function HeroCover() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={tap}
-            className="flex min-h-[52px] w-full items-center justify-center rounded-full border border-[var(--color-gold)]/75 bg-[var(--color-paper)]/10 px-6 text-center text-sm tracking-[0.28em] text-[var(--color-paper)] backdrop-blur-sm transition active:scale-[0.98]"
+            className="flex w-full items-center justify-center rounded-full tracking-[0.22em] transition active:scale-[0.98]"
+            style={{
+              minHeight: 50,
+              border: "1.5px solid rgba(197,160,89,0.85)",
+              color: "#1a1a1a",
+              background: "transparent",
+              fontSize: "0.875rem",
+            }}
           >
             {site.secondaryCta}
           </a>
         </div>
       </div>
+
+      <div className="h-[34px]" aria-hidden />
     </section>
   );
 }

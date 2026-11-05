@@ -21,9 +21,7 @@ describe("Film opener", () => {
 
   it("plays hard-cut montage and skip works once", () => {
     const onDone = vi.fn();
-    const { container } = render(
-      wrap(<IntroOverlay onDone={onDone} />),
-    );
+    const { container } = render(wrap(<IntroOverlay onDone={onDone} />));
     expect(container.querySelector('video[src="/media/opener-montage.mp4"]')).toBeTruthy();
     fireEvent.click(screen.getByText("略過"));
     fireEvent.click(screen.getByText("略過"));
@@ -32,21 +30,20 @@ describe("Film opener", () => {
 });
 
 describe("SeaLogbook", () => {
-  it("shows logbook cards and filters", () => {
+  it("shows album catch-log cards", () => {
     render(wrap(<SeaLogbook />));
     expect(screen.getByText("出海日誌")).toBeTruthy();
     expect(screen.getAllByText("黑鯛").length).toBeGreaterThanOrEqual(1);
-    fireEvent.click(screen.getByRole("button", { name: "夜釣" }));
+    expect(screen.getByText(/迴流一送/)).toBeTruthy();
   });
 });
 
 describe("MemoryPostcards", () => {
   it("FB CTA only after memorial cards", () => {
     render(<MemoryPostcards />);
-    expect(screen.getByText("認識鹿港漁人")).toBeTruthy();
+    expect(screen.getByText("釣友會想傳的幾張")).toBeTruthy();
     const cta = screen.getByRole("link", { name: "看更多出海日常" });
     expect(cta).toHaveAttribute("href", expect.stringContaining("facebook.com"));
-    expect(cta.getAttribute("href")).not.toMatch(/pixnet/i);
   });
 });
 

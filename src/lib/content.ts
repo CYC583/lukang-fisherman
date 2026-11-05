@@ -21,6 +21,7 @@ export type Site = {
   soundYes: string;
   soundNo: string;
   tagline: string;
+  eyebrow: string;
 };
 
 export type Story = {

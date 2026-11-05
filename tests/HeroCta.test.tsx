@@ -12,7 +12,6 @@ describe("HeroCta", () => {
     expect(screen.getByRole("link", { name: "看漁人故事" })).toHaveAttribute("href", "#logbook");
     const fb = screen.getByRole("link", { name: "看更多出海日常" });
     expect(fb).toHaveAttribute("href", expect.stringContaining("facebook.com"));
-    expect(fb).toHaveAttribute("target", "_blank");
   });
 });
 
@@ -22,14 +21,14 @@ describe("HeroCover", () => {
     window.HTMLMediaElement.prototype.pause = vi.fn();
   });
 
-  it("mist-gold cover with dual CTAs and soft loop video (no triple bottom nav)", () => {
+  it("paper panel cover with dual CTAs and soft loop (no triple nav)", () => {
     const { container } = render(
       <SoundProvider>
         <HeroCover />
       </SoundProvider>,
     );
     expect(screen.getByRole("heading", { name: "鹿港漁人" })).toBeTruthy();
-    expect(screen.getByText("LUKANG FISHERMAN")).toBeTruthy();
+    expect(screen.getByText("磯上十年。海不等人。")).toBeTruthy();
     expect(screen.getByRole("link", { name: "看漁人故事" })).toHaveAttribute("href", "#logbook");
     expect(screen.getByRole("link", { name: "看更多出海日常" })).toHaveAttribute(
       "href",

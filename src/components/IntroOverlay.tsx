@@ -6,10 +6,11 @@ import { useSound } from "./SoundContext";
 
 const OPENER_SRC = "/media/opener-montage.mp4";
 
-/** Movie-grade hard-cut trailer. No PPT text carousel. Starts after sound gate. */
+/** Hard-cut film trailer. No PPT captions. Audio only after sound gate. */
 export function IntroOverlay({ onDone }: { onDone: () => void }) {
   const { soundOn, markIntroDone } = useSound();
   const [leaving, setLeaving] = useState(false);
+  const [showLine, setShowLine] = useState(false);
   const done = useRef(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -24,11 +25,13 @@ export function IntroOverlay({ onDone }: { onDone: () => void }) {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    // Mute only if she chose silent enter; otherwise play with baked BGM
     v.muted = soundOn !== true;
     v.volume = soundOn === true ? 1 : 0;
     const p = v.play();
     if (p && typeof p.catch === "function") p.catch(() => {});
+    // Attitude line only after climax (~13.6s) — never in first 5s
+    const lineTimer = window.setTimeout(() => setShowLine(true), 14000);
+    return () => window.clearTimeout(lineTimer);
   }, [soundOn]);
 
   return (
@@ -47,12 +50,13 @@ export function IntroOverlay({ onDone }: { onDone: () => void }) {
         onEnded={finish}
         className="absolute inset-0 h-full w-full object-cover"
       />
-      {/* Max one short gold line — appears briefly near settle */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-16 flex justify-center px-8">
-        <p className="text-center text-[11px] tracking-[0.4em] text-[var(--color-gold)]/90 drop-shadow">
-          磯釣，是與海的靜默對話。
-        </p>
-      </div>
+      {showLine && (
+        <div className="pointer-events-none absolute inset-x-0 bottom-20 flex justify-center px-8">
+          <p className="text-center text-[12px] tracking-[0.35em] text-[#C5A059] drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+            磯上十年。海不等人。
+          </p>
+        </div>
+      )}
     </div>
   );
 }
