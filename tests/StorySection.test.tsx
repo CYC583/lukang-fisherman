@@ -4,7 +4,7 @@ import { describe, it, expect, afterEach, vi, beforeEach } from "vitest";
 import { SiteFooter } from "@/components/SiteFooter";
 import { IntroOverlay } from "@/components/IntroOverlay";
 import { SoundProvider } from "@/components/SoundContext";
-import { GearWall } from "@/components/GearWall";
+import { RouteConstellation } from "@/components/RouteConstellation";
 
 afterEach(cleanup);
 
@@ -28,10 +28,11 @@ describe("Film opener", () => {
   });
 });
 
-describe("GearWall replaces SeaLogbook stack", () => {
-  it("is the interactive gear stage", () => {
-    render(wrap(<GearWall />));
-    expect(screen.getByText("裝備牆")).toBeTruthy();
+describe("RouteConstellation replaces GearWall on the page", () => {
+  it("is the route star map, not the gear wall", () => {
+    render(wrap(<RouteConstellation />));
+    expect(screen.getByRole("heading", { name: "釣場航跡 · 磯路星圖" })).toBeTruthy();
+    expect(screen.queryByText("裝備牆")).toBeNull();
     expect(screen.queryByText("出海日誌")).toBeNull();
   });
 });

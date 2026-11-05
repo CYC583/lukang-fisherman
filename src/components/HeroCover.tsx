@@ -159,7 +159,7 @@ export function HeroCover() {
             {site.mapCta}
           </a>
           <a
-            href="#gear"
+            href="#routes"
             onClick={tap}
             className="flex w-full items-center justify-center transition active:opacity-90"
             style={{

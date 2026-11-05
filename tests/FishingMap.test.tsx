@@ -51,16 +51,50 @@ describe("FishingMap", () => {
     fireEvent.click(screen.getByTestId("species-drawer-toggle"));
     expect(screen.getByTestId("species-drawer")).toBeTruthy();
 
+    await screen.findByTestId("mock-globe");
     const chip = screen.getByRole("button", { name: "澎湖南海 · 東嶼坪豬母塭" });
     expect(chip).toBeTruthy();
     fireEvent.click(chip);
-    await waitFor(() => {
-      expect(screen.getByTestId("spot-detail")).toBeTruthy();
-    });
+    // panel is gated on the camera settling — not shown mid-flight
+    expect(screen.queryByTestId("spot-detail")).toBeNull();
+    expect(screen.getByTestId("fly-hud").getAttribute("data-visible")).toBe("1");
+    await waitFor(
+      () => {
+        expect(screen.getByTestId("spot-detail")).toBeTruthy();
+      },
+      { timeout: 5000 },
+    );
+    expect(screen.getByTestId("fly-hud").getAttribute("data-phase")).toBe("settled");
+    expect(screen.getByTestId("spot-detail").getAttribute("data-state")).toBe("in");
+    expect(screen.getByTestId("globe-focus")).toBeTruthy();
     expect(screen.getByTestId("spot-detail").textContent).toMatch(/黃雞魚/);
     expect(screen.getByTestId("spot-original")).toHaveAttribute(
       "href",
       expect.stringContaining("pixnet.net"),
     );
-  });
+  }, 10000);
+
+  it("switching spots exits the old panel, re-flies, then shows the new one; close collapses", async () => {
+    render(
+      <SoundProvider>
+        <FishingMap />
+      </SoundProvider>,
+    );
+    await screen.findByTestId("mock-globe");
+    fireEvent.click(screen.getByRole("button", { name: "澎湖南海 · 東嶼坪豬母塭" }));
+    await waitFor(() => expect(screen.getByTestId("spot-detail")).toBeTruthy(), { timeout: 5000 });
+
+    fireEvent.click(screen.getByRole("button", { name: "蘇澳 · 三仙尖礁" }));
+    expect(screen.getByTestId("spot-detail").getAttribute("data-state")).toBe("out");
+    await waitFor(() => expect(screen.queryByTestId("spot-detail")).toBeNull(), { timeout: 2000 });
+    await waitFor(
+      () => expect(screen.getByTestId("spot-detail").textContent).toMatch(/三仙尖礁/),
+      { timeout: 5000 },
+    );
+
+    fireEvent.click(screen.getByTestId("spot-close"));
+    expect(screen.getByTestId("spot-detail").getAttribute("data-state")).toBe("out");
+    await waitFor(() => expect(screen.queryByTestId("spot-detail")).toBeNull(), { timeout: 2000 });
+    expect(screen.getByTestId("fly-hud").getAttribute("data-visible")).toBe("0");
+  }, 15000);
 });
