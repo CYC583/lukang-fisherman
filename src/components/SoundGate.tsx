@@ -23,7 +23,7 @@ export function SoundGate() {
           style={{
             writingMode: "vertical-rl",
             letterSpacing: "0.35em",
-            fontSize: "clamp(2.5rem, 11vw, 3.5rem)",
+            fontSize: "clamp(2.85rem, 12vw, 3.85rem)",
           }}
         >
           {site.title}
@@ -38,7 +38,7 @@ export function SoundGate() {
           sfx.confirm();
           choose(true);
         }}
-        className="min-h-[56px] w-full max-w-xs rounded-full bg-[var(--color-gold)] px-8 py-5 text-center text-base font-bold tracking-[0.22em] text-[var(--color-indigo)] shadow-[0_12px_40px_rgba(198,167,94,0.45)] transition active:scale-[0.98]"
+        className="min-h-[56px] w-full max-w-xs rounded-full bg-[var(--color-gold)] px-8 py-5 text-center text-lg font-bold tracking-[0.18em] text-[var(--color-indigo)] shadow-[0_12px_40px_rgba(198,167,94,0.45)] transition active:scale-[0.98]"
       >
         {site.soundYes}
       </button>
