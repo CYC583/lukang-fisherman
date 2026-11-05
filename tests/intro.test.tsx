@@ -33,8 +33,8 @@ it("sound gate shows custom enter button and enables sound", () => {
       <Probe />
     </SoundProvider>,
   );
-  expect(screen.getByRole("button", { name: "點我開啟聲音／進入" })).toBeTruthy();
-  fireEvent.click(screen.getByRole("button", { name: "點我開啟聲音／進入" }));
+  expect(screen.getByRole("button", { name: "開啟聲音／進入" })).toBeTruthy();
+  fireEvent.click(screen.getByRole("button", { name: "開啟聲音／進入" }));
   expect(screen.getByTestId("sound").textContent).toBe("true");
 });
 

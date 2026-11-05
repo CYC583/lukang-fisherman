@@ -7,14 +7,16 @@ describe("content", () => {
     expect(site.title).toBe("鹿港漁人");
     expect(site.primaryCta).toBe("看漁人故事");
     expect(site.secondaryCta).toBe("看更多出海日常");
-    expect(site.tagline).toMatch(/磯上十幾年/);
+    expect(site.tagline).toBe("磯上十幾年。潮汐不等人。");
     expect(site.footerCredit).toBe("製作人：愛爸爸的女兒C");
     expect(site.facebookUrl).toContain("facebook.com");
+    expect(site.soundYes).toMatch(/開啟聲音/);
   });
 
-  it("has opener montage + album log + memorials", () => {
+  it("has opener montage + album log + editorial memories", () => {
     expect(getStories()[0].media?.src).toContain("opener-montage");
     expect(getLogbook().length).toBeGreaterThanOrEqual(3);
     expect(getMemories().length).toBeGreaterThanOrEqual(3);
+    expect(getMemories().every((m) => m.title.length > 0)).toBe(true);
   });
 });

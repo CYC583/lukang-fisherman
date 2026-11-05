@@ -17,9 +17,18 @@ export function MuteToggle({ muted, onToggle }: { muted: boolean; onToggle: () =
       }}
       aria-pressed={!muted}
       aria-label={muted ? "開啟配樂" : "關閉配樂"}
-      className="fixed bottom-4 right-4 z-[60] flex h-12 w-12 items-center justify-center rounded-full border border-[var(--color-gold)] bg-[var(--color-paper)]/90 text-xl text-[var(--color-indigo)] shadow-md backdrop-blur"
+      className="fixed bottom-5 right-5 z-[60] flex h-11 w-11 items-center justify-center backdrop-blur-sm"
+      style={{
+        border: "1px solid rgba(197,160,89,0.65)",
+        background: "rgba(247,244,237,0.92)",
+        color: "var(--color-indigo)",
+        fontSize: "0.875rem",
+        letterSpacing: "0.08em",
+      }}
     >
-      <span aria-hidden>{muted ? "🔇" : "🔊"}</span>
+      <span aria-hidden style={{ fontFamily: "var(--font-display)", fontSize: "0.7rem", letterSpacing: "0.12em" }}>
+        {muted ? "靜" : "音"}
+      </span>
     </button>
   );
 }

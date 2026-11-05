@@ -4,7 +4,7 @@ import { getSite } from "@/lib/content";
 import { setSfxEnabled, sfx } from "@/lib/sfx";
 import { useSound } from "./SoundContext";
 
-/** First screen: silent until she taps our custom button. */
+/** First screen: silent until custom button. Japanese fishing-program gate. */
 export function SoundGate() {
   const { soundOn, choose } = useSound();
   const site = getSite();
@@ -15,19 +15,22 @@ export function SoundGate() {
       role="dialog"
       aria-modal="true"
       aria-label={site.soundPrompt}
-      className="fixed inset-0 z-[90] flex flex-col items-center justify-center bg-[var(--color-indigo)] px-6"
+      className="fixed inset-0 z-[90] flex flex-col items-center justify-center bg-[var(--color-indigo)] px-8"
     >
-      <div className="mb-12 flex flex-col items-center gap-4 text-center">
+      <div className="mb-14 flex flex-col items-center gap-5 text-center">
+        <p className="mag-label">ISOFISHING · TAIWAN</p>
         <p
           className="font-bold leading-none text-[var(--color-gold)]"
           style={{
             writingMode: "vertical-rl",
-            letterSpacing: "0.35em",
-            fontSize: "clamp(2.85rem, 12vw, 3.85rem)",
+            letterSpacing: "0.42em",
+            fontSize: "clamp(2.75rem, 11vw, 3.6rem)",
+            fontFamily: "var(--font-display)",
           }}
         >
           {site.title}
         </p>
+        <div className="mag-rule mt-2" aria-hidden />
       </div>
 
       <button
@@ -37,7 +40,15 @@ export function SoundGate() {
           sfx.confirm();
           choose(true);
         }}
-        className="min-h-[56px] w-full max-w-xs rounded-full bg-[var(--color-gold)] px-8 py-5 text-center text-lg font-bold tracking-[0.18em] text-[var(--color-indigo)] shadow-[0_12px_40px_rgba(198,167,94,0.45)] transition active:scale-[0.98]"
+        className="w-full max-w-xs font-bold transition active:opacity-90"
+        style={{
+          minHeight: 56,
+          background: "var(--color-gold)",
+          color: "var(--color-indigo)",
+          fontFamily: "var(--font-display)",
+          fontSize: "1rem",
+          letterSpacing: "0.22em",
+        }}
       >
         {site.soundYes}
       </button>
@@ -48,7 +59,12 @@ export function SoundGate() {
           setSfxEnabled(false);
           choose(false);
         }}
-        className="mt-5 min-h-[44px] px-4 text-[14px] tracking-[0.2em] text-[var(--color-paper)]/70 underline underline-offset-4"
+        className="mt-6 min-h-[44px] px-4 text-[var(--color-paper)]/55 underline underline-offset-4 transition active:opacity-80"
+        style={{
+          fontSize: "0.8125rem",
+          letterSpacing: "0.22em",
+          fontFamily: "var(--font-display)",
+        }}
       >
         {site.soundNo}
       </button>

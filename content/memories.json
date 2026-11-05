@@ -2,33 +2,25 @@
   {
     "id": "rod-at-eddy",
     "badge": "釣點",
-    "title": "卵石堤迴流",
-    "blurb": "他常丟的那個角。懂的人一眼就知道為什麼。",
+    "title": "他的角",
+    "blurb": "卵石堤迴流——懂的人會點頭。",
     "image": "/media/fb/post_gallery_1_590.jpg",
-    "credit": "鹿港漁人粉專公開貼文"
+    "credit": "公開釣行"
   },
   {
     "id": "black-porgy",
-    "badge": "戰果",
+    "badge": "釣果",
     "title": "剛上岸",
-    "blurb": "線還在嘴邊。釣友最愛傳的就是這種圖。",
+    "blurb": "線還在嘴邊。這就是他。",
     "image": "/media/fb/post_gallery_2_590.jpg",
-    "credit": "鹿港漁人粉專公開貼文"
-  },
-  {
-    "id": "yellowfin",
-    "badge": "魚種",
-    "title": "黃鰭細節",
-    "blurb": "這種光他不會省略。職人眼力。",
-    "image": "/media/fb/post_gallery_3_590.jpg",
-    "credit": "鹿港漁人粉專公開貼文"
+    "credit": "公開釣行"
   },
   {
     "id": "master-catch",
-    "badge": "師傅",
-    "title": "全副武裝",
-    "blurb": "穩站磯上。朋友看了只會想：我也要練成這樣。",
+    "badge": "人物",
+    "title": "鹿港漁人",
+    "blurb": "磯上十幾年。全副武裝。",
     "image": "/media/fb/post_older_4_590.jpg",
-    "credit": "鹿港漁人粉專公開貼文"
+    "credit": "公開釣行"
   }
 ]

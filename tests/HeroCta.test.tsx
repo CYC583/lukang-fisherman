@@ -21,20 +21,21 @@ describe("HeroCover", () => {
     window.HTMLMediaElement.prototype.pause = vi.fn();
   });
 
-  it("paper panel cover with dual CTAs and soft loop (no triple nav)", () => {
+  it("paper magazine plate with dual CTAs and soft loop (no triple nav)", () => {
     const { container } = render(
       <SoundProvider>
         <HeroCover />
       </SoundProvider>,
     );
     expect(screen.getByRole("heading", { name: "鹿港漁人" })).toBeTruthy();
-    expect(screen.getByText("磯上十幾年。海不等人。")).toBeTruthy();
+    expect(screen.getByText("磯上十幾年。潮汐不等人。")).toBeTruthy();
     expect(screen.getByRole("link", { name: "看漁人故事" })).toHaveAttribute("href", "#logbook");
     expect(screen.getByRole("link", { name: "看更多出海日常" })).toHaveAttribute(
       "href",
       expect.stringContaining("facebook.com"),
     );
     expect(screen.queryByText("磯釣系列")).toBeNull();
+    expect(screen.queryByText("釣友會想傳的幾張")).toBeNull();
     expect(container.querySelector('video[src="/media/cover-loop.mp4"]')).toBeTruthy();
   });
 });

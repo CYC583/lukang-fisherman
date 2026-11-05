@@ -33,15 +33,17 @@ describe("SeaLogbook", () => {
   it("shows album catch-log cards", () => {
     render(wrap(<SeaLogbook />));
     expect(screen.getByText("出海日誌")).toBeTruthy();
+    expect(screen.getByText(/釣行/)).toBeTruthy();
     expect(screen.getAllByText("黑鯛").length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText(/迴流一送/)).toBeTruthy();
   });
 });
 
 describe("MemoryPostcards", () => {
-  it("FB CTA only after memorial cards", () => {
+  it("shows Japanese editorial plates and FB CTA only", () => {
     render(<MemoryPostcards />);
-    expect(screen.getByText("釣友會想傳的幾張")).toBeTruthy();
+    expect(screen.queryByText("釣友會想傳的幾張")).toBeNull();
+    expect(screen.getByText("磯の記録")).toBeTruthy();
     const cta = screen.getByRole("link", { name: "看更多出海日常" });
     expect(cta).toHaveAttribute("href", expect.stringContaining("facebook.com"));
   });

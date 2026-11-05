@@ -1,7 +1,14 @@
 :root {
-  --color-paper: #F4F1EA;
+  --color-paper: #F7F4ED;
   --color-indigo: #0B1C2C;
   --color-charcoal: #1A1A1A;
-  --color-gold: #C6A75E;
+  --color-gold: #C5A059;
+  --color-gold-soft: rgba(197, 160, 89, 0.55);
+  --color-gold-line: rgba(197, 160, 89, 0.42);
   --color-seafoam: #7FB8A8;
+  --font-display: "Noto Serif JP", "Noto Serif TC", "Hiragino Mincho ProN", "Songti TC", serif;
+  --font-body: "Noto Serif TC", "Noto Serif JP", "Hiragino Mincho ProN", "PingFang TC", serif;
+  --track-display: 0.32em;
+  --track-label: 0.42em;
+  --track-body: 0.06em;
 }

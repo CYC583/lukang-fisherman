@@ -5,7 +5,10 @@ import { getSite } from "@/lib/content";
 import { sfx } from "@/lib/sfx";
 import { useSoundOptional } from "./SoundContext";
 
-/** Paper + fog-gold cover over cover-loop sea motion. Dual CTAs. No finger/gyro parallax. */
+/**
+ * Magazine title page (扉頁) — paper-white + mist-gold over living sea.
+ * No finger/gyro parallax. No icon row. No heavy card shadow.
+ */
 export function HeroCover() {
   const site = getSite();
   const { soundOn } = useSoundOptional();
@@ -22,7 +25,7 @@ export function HeroCover() {
   useEffect(() => {
     if (soundOn !== true) return;
     sfx.wave();
-    const id = window.setInterval(() => sfx.wave(), 10000);
+    const id = window.setInterval(() => sfx.wave(), 12000);
     return () => window.clearInterval(id);
   }, [soundOn]);
 
@@ -33,71 +36,83 @@ export function HeroCover() {
   return (
     <section
       id="cover"
-      aria-label="封面"
+      aria-label="扉頁"
       className="relative flex min-h-dvh w-full snap-start flex-col items-center justify-center overflow-hidden bg-[var(--color-indigo)]"
     >
-      {/* Sea/light motion from cover-loop itself — no finger/gyro parallax */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden" aria-hidden>
         <video
           ref={videoRef}
           src="/media/cover-loop.mp4"
           poster="/media/hero-cover.jpg"
-          aria-hidden
           autoPlay
           muted
           loop
           playsInline
           preload="metadata"
-          className="absolute inset-0 h-full w-full scale-105 object-cover opacity-45 blur-[6px]"
+          className="absolute inset-0 h-full w-full scale-[1.04] object-cover opacity-[0.48]"
+        />
+        {/* soft mist veil — light, not muddy */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(11,28,44,0.55) 0%, rgba(11,28,44,0.28) 42%, rgba(11,28,44,0.62) 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 38%, rgba(247,244,237,0.14) 0%, transparent 58%)",
+            animation: "mistShift 9s ease-in-out infinite",
+          }}
         />
       </div>
-      <div className="absolute inset-0 bg-[var(--color-indigo)]/50" />
 
-      {/* Paper + fog-gold panel */}
+      {/* Magazine plate — thin gold frame, paper field, precise margins */}
       <div
-        className="relative z-10 mx-5 flex w-[calc(100%-40px)] max-w-[360px] flex-col items-center rounded-[18px] border px-7 py-7 text-center shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
+        className="relative z-10 mx-auto flex w-[min(92vw,22.5rem)] flex-col items-center px-8 py-10 text-center"
         style={{
-          background: "rgba(252,250,245,0.90)",
-          borderColor: "rgba(197,160,89,0.55)",
-          backdropFilter: "blur(10px)",
-          WebkitBackdropFilter: "blur(10px)",
-          marginTop: "8vh",
+          background: "rgba(247,244,237,0.92)",
+          border: "1px solid rgba(197,160,89,0.55)",
+          boxShadow: "0 1px 0 rgba(255,255,255,0.35) inset",
         }}
       >
-        <p
-          className="mb-4 font-semibold tracking-[0.28em]"
-          style={{ color: "#C5A059", fontSize: "clamp(1rem, 4vw, 1.125rem)" }}
-        >
-          {site.eyebrow}
-        </p>
+        <p className="mag-label mb-7">{site.eyebrow}</p>
 
         <h1
-          className="font-bold leading-none tracking-[0.2em]"
-          style={{ color: "#1a1a1a", fontSize: "clamp(2.25rem, 10vw, 2.75rem)" }}
+          className="mag-title leading-none text-[var(--color-charcoal)]"
+          style={{ fontSize: "clamp(2.35rem, 11vw, 2.85rem)" }}
         >
           {site.title}
         </h1>
 
-        <div className="my-4 h-px w-10" style={{ background: "rgba(197,160,89,0.7)" }} aria-hidden />
+        <div className="mag-rule my-6" aria-hidden />
 
-        {/* Attitude line — dark ink on paper, 24–28px, tight tracking */}
         <p
-          className="mb-7 font-semibold leading-[1.45] tracking-[0.04em]"
-          style={{ color: "#1a1a1a", fontSize: "clamp(1.5rem, 7vw, 1.75rem)" }}
+          className="mb-9 font-semibold leading-[1.55] text-[var(--color-charcoal)]"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(1.375rem, 6.2vw, 1.625rem)",
+            letterSpacing: "0.08em",
+            maxWidth: "16em",
+          }}
         >
           {site.tagline}
         </p>
 
-        <div className="flex w-full flex-col gap-3">
+        <div className="flex w-full flex-col gap-2.5">
           <a
             href="#logbook"
             onClick={tap}
-            className="flex w-full items-center justify-center rounded-full font-bold tracking-[0.22em] transition active:scale-[0.98]"
+            className="flex w-full items-center justify-center font-bold transition active:opacity-90"
             style={{
-              minHeight: 56,
-              background: "#C5A059",
-              color: "#0B1C2C",
-              fontSize: "1.0625rem",
+              minHeight: 52,
+              background: "var(--color-gold)",
+              color: "var(--color-indigo)",
+              fontSize: "0.9375rem",
+              letterSpacing: "0.28em",
+              fontFamily: "var(--font-display)",
             }}
           >
             {site.primaryCta}
@@ -107,13 +122,15 @@ export function HeroCover() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={tap}
-            className="flex w-full items-center justify-center rounded-full tracking-[0.22em] transition active:scale-[0.98]"
+            className="flex w-full items-center justify-center transition active:opacity-90"
             style={{
-              minHeight: 52,
-              border: "1.5px solid rgba(197,160,89,0.85)",
-              color: "#1a1a1a",
+              minHeight: 48,
+              border: "1px solid rgba(197,160,89,0.75)",
+              color: "var(--color-charcoal)",
               background: "transparent",
-              fontSize: "1rem",
+              fontSize: "0.875rem",
+              letterSpacing: "0.28em",
+              fontFamily: "var(--font-display)",
             }}
           >
             {site.secondaryCta}
@@ -121,7 +138,13 @@ export function HeroCover() {
         </div>
       </div>
 
-      <div className="h-[34px]" aria-hidden />
+      {/* quiet bottom breath — no icons */}
+      <div className="pointer-events-none absolute bottom-7 left-0 right-0 flex justify-center" aria-hidden>
+        <span
+          className="block h-8 w-px"
+          style={{ background: "linear-gradient(180deg, transparent, rgba(197,160,89,0.7))" }}
+        />
+      </div>
     </section>
   );
 }
