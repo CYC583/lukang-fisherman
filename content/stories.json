@@ -3,18 +3,30 @@
     "id": "duel",
     "title": "與黑鯛對智",
     "body": "看海像剝洋蔥，一層一層讀：浪腳、迴流、卵石堆。餌順著流送出去，像放風箏一樣耐心。黑鯛很精，但漁人更懂牠們會躲在哪裡。",
-    "media": { "type": "video", "src": "/media/placeholder-backflow.mp4", "alt": "迴流處的黑鯛（示意片段）" }
+    "media": {
+      "type": "video",
+      "src": "/media/story-reef-dawn.mp4",
+      "alt": "迴流處的黑鯛（示意片段）"
+    }
   },
   {
     "id": "expedition",
     "title": "半夜出發，凌晨登礁",
     "body": "別人還在睡，他已經備好餌、一路南下。天還沒亮就踩上礁岩，等潮一轉，第一尾上鉤——那一刻，整晚的車程都值得了。",
-    "media": { "type": "video", "src": "/media/placeholder-dawn-reef.mp4", "alt": "清晨登礁（示意片段）" }
+    "media": {
+      "type": "video",
+      "src": "/media/placeholder-dawn-reef.mp4",
+      "alt": "清晨登礁（示意片段）"
+    }
   },
   {
     "id": "now",
     "title": "現在，還在釣",
     "body": "從磯釣到前打，十年來沒停過。粉專還在更新，釣友喊他一聲師傅。海一直在，鹿港漁人也一直在。",
-    "media": { "type": "image", "src": "/media/placeholder-now.jpg", "alt": "鹿港漁人近期釣行（示意圖）" }
+    "media": {
+      "type": "image",
+      "src": "/media/placeholder-now.jpg",
+      "alt": "鹿港漁人近期釣行（示意圖）"
+    }
   }
 ]
