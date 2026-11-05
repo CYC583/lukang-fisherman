@@ -1,6 +1,7 @@
 import { IntroGate } from "@/components/IntroOverlay";
 import { HeroCta } from "@/components/HeroCta";
 import { StorySection } from "@/components/StorySection";
+import { AmbientAudio } from "@/components/AmbientAudio";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getSite } from "@/lib/content";
 
@@ -16,6 +17,7 @@ export default function Home() {
       </section>
       <StorySection />
       <SiteFooter />
+      <AmbientAudio />
     </main>
   );
 }
